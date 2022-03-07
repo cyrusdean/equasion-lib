@@ -1,0 +1,61 @@
+@import '../../shared/styles/input-styles.scss';
+
+.eq-select {
+  z-index: 2;
+
+  .options {
+    position: absolute;
+    width: 100%;
+    background-color: #ffffff;
+    max-height: 0;
+    overflow-y: hidden;
+    box-sizing: border-box;
+    transition: max-height 0.15s ease-out, padding 0.15s ease-out;
+    border-radius: 3px;
+    padding: 0;
+
+    .option {
+      padding: 5px 10px;
+      cursor: pointer;
+
+      &.selected,
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+  .multi-selected-option {
+    display: inline-flex;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 3px;
+    border: 1px solid var(--primaryColor);
+    color: var(--primaryColor);
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    border-radius: 3px;
+
+    svg {
+      cursor: pointer;
+      color: var(--n300);
+      opacity: 1;
+    }
+  }
+  &.open {
+    .options {
+      padding: 5px 0;
+      max-height: 200px;
+      transition: max-height 0.25s ease-in, padding 0.25s ease-in;
+      overflow-y: scroll;
+    }
+  }
+  &.open ~ {
+    .eq-select,
+    .eq-input,
+    .eq-rangepicker,
+    .eq-datepicker {
+      z-index: 0;
+    }
+  }
+}

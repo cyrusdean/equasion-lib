@@ -1,0 +1,43 @@
+@import '../../shared/styles/input-styles.scss';
+
+.eq-datepicker {
+  z-index: 1;
+
+  input {
+    text-decoration: transparent;
+    cursor: pointer;
+
+    &::-webkit-datetime-edit-day-field:focus,
+    &::-webkit-datetime-edit-month-field:focus,
+    &::-webkit-datetime-edit-year-field:focus {
+      background-color: transparent;
+      outline: none;
+    }
+    &::-webkit-calendar-picker-indicator {
+      display: none;
+      cursor: pointer;
+      filter: invert(89%) sepia(6%) saturate(215%) hue-rotate(172deg)
+        brightness(95%) contrast(93%);
+    }
+  }
+  .rdrCalendarWrapper {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s ease-in;
+
+    &.open {
+      opacity: 1;
+      visibility: visible;
+      transition: visibility 0.2s, opacity 0.2s ease-out;
+    }
+  }
+  &.open ~ {
+    .eq-select,
+    .eq-input,
+    .eq-rangepicker,
+    .eq-datepicker {
+      z-index: 0;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+@import '../../shared/styles/input-styles.scss';
+
+.eq-rangepicker {
+  z-index: 1;
+
+  input {
+    text-decoration: transparent;
+    cursor: pointer;
+  }
+  .rdrDateRangePickerWrapper {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s ease-in;
+
+    &.open {
+      opacity: 1;
+      visibility: visible;
+      transition: visibility 0.2s, opacity 0.2s ease-out;
+    }
+  }
+  &.open ~ {
+    .eq-select,
+    .eq-input,
+    .eq-rangepicker,
+    .eq-datepicker {
+      z-index: 0;
+    }
+  }
+}

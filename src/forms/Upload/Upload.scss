@@ -1,0 +1,105 @@
+.eq-upload {
+  position: relative;
+  margin: 25px 0;
+
+  .eq-upload-wrap {
+    position: relative;
+    cursor: pointer;
+
+    input {
+      cursor: pointer;
+      color: transparent;
+
+      &::-webkit-file-upload-button,
+      &::file-selector-button {
+        display: none;
+      }
+      &:not(:placeholder-shown):not(:focus) {
+        ~ label {
+          top: 50%;
+          font-size: 15px;
+          color: var(--n300);
+          transform: translateY(-50%);
+        }
+      }
+    }
+    .eq-button {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  .upload-file-list {
+    position: absolute;
+    left: 4px;
+    top: calc(50% + 5px);
+    transform: translateY(-50%);
+
+    .upload-file {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 5px;
+      color: var(--primaryColor);
+
+      svg {
+        margin-right: 3px;
+      }
+      .delete-file {
+        color: var(--error);
+        margin-left: 3px;
+        cursor: pointer;
+        padding: 3px;
+      }
+    }
+  }
+  &.error {
+    input {
+      &:not(:placeholder-shown):not(:focus) {
+        border-color: var(--error);
+      }
+      &:focus ~ .error-message {
+        opacity: 0;
+      }
+    }
+  }
+  &.has-files {
+    input:not(:placeholder-shown):not(:focus) ~ label {
+      color: var(--n300);
+      top: 0;
+      left: 0;
+      font-size: 12px;
+      transform: translate(0);
+      transition: all 0.2s linear;
+    }
+  }
+  &.dropzone {
+    .eq-upload-wrap {
+      input {
+        border-style: dashed;
+        height: 104px;
+
+        &:not(:placeholder-shown):not(:focus) ~ label {
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          transition: all 0.4s linear;
+        }
+      }
+    }
+  }
+  &.dropzone.has-files {
+    .eq-upload-wrap {
+      input {
+        &:not(:placeholder-shown):not(:focus) ~ label {
+          top: 0;
+          left: 0;
+          transform: translate(0);
+        }
+      }
+    }
+    .upload-file-list {
+      top: 50%;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+.react-modal-overlay.ReactModal__Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+
+  background-color: transparent;
+  opacity: 0;
+  transition: all 400ms ease-in-out;
+
+  .react-modal {
+    transition: all 400ms ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -100px);
+    border-radius: 8px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+
+    > svg {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--borderColor);
+    }
+  }
+  &--after-open {
+    opacity: 1;
+
+    .react-modal {
+      transform: translate(-50%, 100px);
+    }
+  }
+  &--before-close {
+    opacity: 0;
+
+    .react-modal {
+      transform: translate(-50%, -100px);
+    }
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--n900);
+    opacity: 0.5;
+  }
+}

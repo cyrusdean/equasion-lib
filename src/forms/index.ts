@@ -1,0 +1,8 @@
+export { default as Checkbox } from './Checkbox/index'
+export { default as Input } from './Input/index'
+export { default as DatePicker } from './DatePicker/index'
+export { default as RangePicker } from './RangePicker/index'
+export { default as Select } from './Select/index'
+export { default as Upload } from './Upload/index'
+export { default as Radio } from './Radio/index'
+// export { default as ColorPicker } from './ColorPicker/index'
