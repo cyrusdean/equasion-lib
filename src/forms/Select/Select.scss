@@ -6,7 +6,7 @@
   .options {
     position: absolute;
     width: 100%;
-    background-color: #ffffff;
+    background-color: var(--app-color, #ffffff);
     max-height: 0;
     overflow-y: hidden;
     box-sizing: border-box;

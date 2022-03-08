@@ -8,9 +8,11 @@ To unlink run `npm unlink .` anywhere to remove all global symlinks. Run `npm un
 
 OR
 
-`"file:../your-repository/node_modules/formik",`
-`"react": "file:../your-repository/node_modules/react",`
-`"react-dom": "file:../your-repository/node_modules/react-dom",`
+```
+"file:../your-repository/node_modules/formik",
+"react": "file:../your-repository/node_modules/react",
+"react-dom": "file:../your-repository/node_modules/react-dom",
+```
 
 in package JSON of equasion-lib with:
 

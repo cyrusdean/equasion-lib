@@ -18,6 +18,7 @@
     transform: translate(-50%, -100px);
     border-radius: 8px;
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+    background-color: var(--app-color, #ffffff);
 
     > svg {
       position: absolute;

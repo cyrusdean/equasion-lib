@@ -35,6 +35,8 @@
     font-size: 1.5rem;
     transition: all 0.2s linear;
     box-sizing: border-box;
+    background-color: var(--app-color, transparent);
+    color: inherit;
 
     &:not(:placeholder-shown),
     &:-webkit-autofill {
