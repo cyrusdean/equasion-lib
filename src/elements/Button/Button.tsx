@@ -51,7 +51,7 @@ const AppButton = ({
       className={combinedClasslassName}
       style={Object.assign(
         { ...defaultStyle, ...style },
-        fullWidth ? { width: '100%', display: 'block' } : {}
+        fullWidth ? { width: '100%', display: 'flex' } : {}
       )}
       type={isSubmit ? 'submit' : 'button'}
       {...rest}
