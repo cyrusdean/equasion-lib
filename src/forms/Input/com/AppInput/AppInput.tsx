@@ -11,7 +11,7 @@ const AppInput = ({
   iconAfter,
   ...rest
 }) => {
-  const [, setCurrentValue] = useState(defaultValue)
+  const [currentValue, setCurrentValue] = useState(defaultValue)
 
   const updateValue = (value) => {
     setCurrentValue(value)
@@ -42,6 +42,7 @@ const AppInput = ({
             }
           }}
           type={inputType}
+          value={currentValue}
           {...rest}
           placeholder=" "
         />
