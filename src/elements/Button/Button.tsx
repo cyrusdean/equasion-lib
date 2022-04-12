@@ -15,16 +15,16 @@ type ButtonType =
 type ButtonSize = 'default' | 'large' | 'compact'
 
 interface ButtonProps {
-  className: string
-  children: any
-  style: object
-  type: ButtonType
-  fullWidth: boolean
-  isSubmit: boolean
-  disabled: boolean
-  size: ButtonSize
-  iconBefore: any
-  iconAfter: any
+  className?: string
+  children?: any
+  style?: object
+  type?: ButtonType
+  fullWidth?: boolean
+  isSubmit?: boolean
+  disabled?: boolean
+  size?: ButtonSize
+  iconBefore?: any
+  iconAfter?: any
 }
 
 const AppButton = ({

@@ -1,6 +1,6 @@
 {
   "name": "equasion-lib",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Component tooling for streamlined development.",
   "author": "Cyrus Dean",
   "license": "Apache-2.0",
@@ -26,6 +26,7 @@
     "react-icons": "^4.3.1",
     "react-modal": "^3.14.4",
     "react-spinners": "^0.11.0",
+    "react-tiny-popover": "^7.0.1",
     "sweetalert2": "^11.4.0"
   },
   "peerDependencies": {
@@ -40,6 +41,7 @@
     "react-icons": "^4.3.1",
     "react-modal": "^3.14.4",
     "react-spinners": "^0.11.0",
+    "react-tiny-popover": "^7.0.1",
     "sweetalert2": "^11.4.0"
   },
   "devDependencies": {
