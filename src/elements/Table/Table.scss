@@ -1,0 +1,17 @@
+.react-tiny-popover-container {
+  z-index: 20;
+  background-color: var(--n700);
+  padding: 5px;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+  .popover-arrow {
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid var(--n700);
+  }
+}

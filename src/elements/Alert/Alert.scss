@@ -1,0 +1,12 @@
+.eq-alert {
+  padding: 20px;
+  border: 1px solid;
+
+  &.eq-alert {
+    &-error {
+      border-color: var(--r500);
+      border-radius: 5px;
+      background-color: var(--r100);
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.eq-key-vals {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .eq-key-val {
+    width: 50%;
+    margin-bottom: 10px;
+
+    .eq-key {
+      font-weight: bold;
+    }
+  }
+}
