@@ -74,10 +74,16 @@ const Popconfirm = ({
           {!!hasArrow && <div className="popover-arrow" />}
           {title}
           <div className="eq-popconfirm-buttons">
-            <Button type="danger" size="compact">
+            <Button
+              type="danger"
+              size="compact"
+              // @ts-ignore
+              onClick={() => updateOpen(false)}
+            >
               {cancelText}
             </Button>
-            <Button type="primary" size="compact">
+            {/* @ts-ignore */}
+            <Button type="primary" size="compact" onClick={onConfirm}>
               {okText}
             </Button>
           </div>
