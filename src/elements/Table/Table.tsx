@@ -53,6 +53,7 @@ IEqTableProps & IDataTableProps) => {
       persistTableHead
       onRowClicked={onRowClicked}
       expandableRows={expandableRows}
+      pagination
       {...rest}
     />
   )
