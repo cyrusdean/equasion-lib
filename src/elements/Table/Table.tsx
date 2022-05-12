@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Table from 'react-data-table-component'
 import type { IDataTableProps } from 'react-data-table-component'
 import { TableSearch } from '../'
@@ -43,9 +43,12 @@ IEqTableProps & IDataTableProps) => {
     return newColumn
   })
 
+  useEffect(() => {
+    setRecords(data)
+  }, [data])
+
   return (
     <Table
-      key={records}
       data={records}
       columns={columns}
       pointerOnHover={!!onRowClicked || !!expandableRows}
