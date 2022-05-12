@@ -45,6 +45,7 @@ IEqTableProps & IDataTableProps) => {
 
   return (
     <Table
+      key={records}
       data={records}
       columns={columns}
       pointerOnHover={!!onRowClicked || !!expandableRows}
