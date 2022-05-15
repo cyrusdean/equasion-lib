@@ -30,7 +30,7 @@ const AppSelect = ({
           !currentValue.some(
             (selectedOptionValue) => selectedOptionValue === value
           ))) &&
-      display.toLowerCase().includes(filterValue.toLowerCase())
+      String(display).toLowerCase().includes(filterValue.toLowerCase())
   )
 
   const updateValue = (value) => {
