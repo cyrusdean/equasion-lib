@@ -57,7 +57,7 @@ const AppSelect = ({
               if (
                 !calcedOptions.some(
                   ([, display]) =>
-                    display.toLowerCase() === filterValue.toLowerCase()
+                    String(display).toLowerCase() === filterValue.toLowerCase()
                 ) ||
                 !filterValue
               )

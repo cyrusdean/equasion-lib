@@ -59,7 +59,7 @@ const FormWrappedSelect = ({
               if (
                 !calcedOptions.some(
                   ([, display]) =>
-                    display.toLowerCase() === filterValue.toLowerCase()
+                    String(display).toLowerCase() === filterValue.toLowerCase()
                 )
               )
                 form.setFieldValue(fieldName, '')
