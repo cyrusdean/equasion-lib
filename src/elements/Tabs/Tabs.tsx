@@ -6,7 +6,7 @@ import {
   TabsDataOptions,
   TabsProps,
 } from './index'
-import './tabs.scss'
+import './Tabs.scss'
 
 // mapping function to normalize data
 const mapKeyLabelContent = (
