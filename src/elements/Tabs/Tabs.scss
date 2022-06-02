@@ -1,0 +1,115 @@
+@import '~/src/lib/styles/vars.scss';
+
+.eq-tabs-container {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  background-color: var(--n0, #fff);
+  // padding: 20px;
+  display: flex;
+  border-radius: 8px;
+  .eq-tabs-menu-container {
+    display: flex;
+    .eq-tabs-menu {
+      padding: 10px;
+      border-radius: 8px;
+      background-color: inherit;
+      display: flex;
+      border: 1px solid var(--n75);
+      height: fit-content;
+      .eq-tab-item {
+        white-space: nowrap;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 26px;
+        border-radius: 8px;
+        padding: 5px;
+        // text styles
+        color: var(--n900, #000);
+        margin: 0px;
+        line-height: 20px;
+        font-size: 14px;
+        min-width: fit-content;
+        // All items cursor turns to pointer on hover
+        &:not(.disabled):hover {
+          cursor: pointer;
+        }
+        // All items NOT disabled and NOT active background is changed
+        &:not(.disabled):not(.active):hover {
+          background-color: var(--n200);
+        }
+        // Applies to the actively selected item
+        &.active {
+          background-color: var(--primary500);
+          color: var(--n0, #fff);
+        }
+        &.disabled {
+          // pointer-events: none;
+          cursor: not-allowed;
+          background-color: rgba(183, 188, 196, 0.15);
+          color: var(--n300);
+        }
+      }
+    }
+  }
+  // The 'body' corresponding to the selected tab
+  .eq-tabs-content {
+    height: 100%;
+    color: var(--n900, #000);
+    // padding: 12px;
+    background-color: inherit;
+    overflow: scroll;
+    width: 100%;
+  }
+
+  // Horizontal styling
+  &.horizontal {
+    flex-direction: column;
+    > .eq-tabs-menu-container {
+      height: 80px;
+      align-items: center;
+      width: 100%;
+      overflow-x: scroll;
+      margin-bottom: 8px;
+      .eq-tabs-menu {
+        flex-direction: row;
+        width: fit-content;
+        height: fit-content;
+        // Each tab has 10px margin on the right except for the last one
+        .eq-tab-item {
+          margin-right: 10px;
+          &:last-of-type {
+            margin-right: none;
+          }
+        }
+      }
+    }
+  }
+
+  // Vertical styling
+  &.vertical {
+    flex-direction: row;
+    &.menu-only {
+      width: fit-content;
+    }
+    > .eq-tabs-menu-container {
+      height: 100%;
+      margin-right: 18px;
+      max-width: 25%;
+      min-width: fit-content;
+      overflow-x: scroll;
+
+      .eq-tabs-menu {
+        flex-direction: column;
+        height: fit-content;
+        .eq-tab-item {
+          padding-left: 15px;
+          padding-right: 15px;
+          margin: 5px 0px;
+        }
+      }
+    }
+  }
+}
