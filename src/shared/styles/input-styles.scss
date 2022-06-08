@@ -126,7 +126,6 @@
     input {
       border: 2px solid var(--error);
 
-      &:not(:placeholder-shown),
       &:-webkit-autofill,
       &:focus,
       &:focus-visible {

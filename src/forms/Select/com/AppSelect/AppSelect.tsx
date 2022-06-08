@@ -11,15 +11,16 @@ const AppSelect = ({
   iconAfter,
   ...rest
 }) => {
-  const [currentValue, setCurrentValue] = useState(
-    multi && !defaultValue ? [] : defaultValue
-  )
-  const [focused, setFocused] = useState(false)
-  const [filterValue, setFilterValue] = useState('')
-
   const optionsObj = options.reduce(
     (a, [val, display]) => ({ ...a, [val]: display }),
     {}
+  )
+  const [focused, setFocused] = useState(false)
+  const [filterValue, setFilterValue] = useState(
+    defaultValue ? optionsObj[defaultValue] : ''
+  )
+  const [currentValue, setCurrentValue] = useState(
+    multi && !defaultValue ? [] : defaultValue
   )
 
   const calcedOptions = options.filter(
@@ -67,6 +68,7 @@ const AppSelect = ({
           }}
           onFocus={() => {
             setFocused(true)
+            setFilterValue('')
           }}
           value={filterValue}
           placeholder=" "

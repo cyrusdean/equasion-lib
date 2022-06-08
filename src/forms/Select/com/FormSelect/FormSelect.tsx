@@ -71,6 +71,7 @@ const FormWrappedSelect = ({
           }}
           onFocus={() => {
             setFocused(true)
+            setFilterValue('')
           }}
           value={filterValue}
           id={fieldName}
