@@ -17,7 +17,7 @@ const AppSelect = ({
   )
   const [focused, setFocused] = useState(false)
   const [filterValue, setFilterValue] = useState(
-    defaultValue ? optionsObj[defaultValue] : ''
+    defaultValue ? optionsObj[defaultValue] || '' : ''
   )
   const [currentValue, setCurrentValue] = useState(
     multi && !defaultValue ? [] : defaultValue
