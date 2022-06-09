@@ -1,15 +1,16 @@
+import { ReactElement } from 'react'
 import { PopoverPosition, PopoverAlign } from 'react-tiny-popover'
 
 export interface PopoverProps {
   className: string
-  children: HTMLElement
+  children: ReactElement
   style: object
   arrowAttributes: object
   hasArrow: boolean
   disabled: boolean
   isPopoverOpen: boolean
   setIsPopoverOpen: Function
-  content: HTMLElement
+  content: ReactElement
   position: PopoverPosition
   align: PopoverAlign
 }

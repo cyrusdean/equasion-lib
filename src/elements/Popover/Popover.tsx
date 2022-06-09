@@ -51,6 +51,7 @@ const Popover = ({
             })}
             {...arrowAttributes}
           >
+            {/* // @ts-ignore */}
             {content}
           </ArrowContainer>
         )
