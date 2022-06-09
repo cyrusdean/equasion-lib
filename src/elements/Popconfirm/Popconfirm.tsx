@@ -1,101 +1,77 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { Button } from '../index'
-import { Popover } from 'react-tiny-popover'
-import './Popconfirm.scss'
+import React, { useState } from 'react'
+import { Button, Popover } from '../index'
+import { PopconfirmProps } from './index'
 
-interface PopconfirmProps {
-  className: string
-  children: any
-  style: object
-  hasArrow: boolean
-  isPopconfirmOpen: boolean
-  setIsPopconfirmOpen: Function
-  title: any
-  okText: string
-  cancelText: string
-  onConfirm: Function
-}
+import './Popconfirm.scss'
 
 const Popconfirm = ({
   children,
-  isPopconfirmOpen,
-  setIsPopconfirmOpen,
   hasArrow = true,
   title = 'Are you sure?',
   okText = 'Yes',
   cancelText = 'No',
+  description = '',
   onConfirm,
+  onCancel,
   style = {},
   ...rest
 }: PopconfirmProps) => {
-  const [popoverPosition, setPopoverPosition] = useState({
-    top: -1000,
-    left: -1000,
-  })
-  const wrapRef = useRef(null)
-  const isManual = !!setIsPopconfirmOpen
-  const [isOpen, setIsOpen] = useState(isPopconfirmOpen)
-
-  useEffect(() => {
-    setIsOpen(isPopconfirmOpen)
-  }, [isPopconfirmOpen])
-
-  const updateOpen = (newOpen) => {
-    if (isManual) setIsPopconfirmOpen(newOpen)
-    else setIsOpen(newOpen)
-  }
-
-  useEffect(() => {
-    if (isOpen) {
-      const { current: { firstChild = {} } = {} } = wrapRef || {}
-      const {
-        top = 0,
-        left = 0,
-        height = 0,
-      } = firstChild ? firstChild.getBoundingClientRect() : {}
-
-      setPopoverPosition({
-        top: top + height + 10,
-        left: left,
-      })
-    }
-  }, [isOpen])
+  const [popconfirmOpen, setPopconfirmOpen] = useState(false)
 
   return (
+    // @ts-ignore
     <Popover
-      isOpen={isOpen}
-      positions={['top', 'right']}
-      padding={8}
-      ref={wrapRef}
-      reposition={false}
-      onClickOutside={() => updateOpen(false)}
+      isPopoverOpen={popconfirmOpen}
+      setIsPopoverOpen={setPopconfirmOpen}
       content={
-        <>
-          {!!hasArrow && <div className="popover-arrow" />}
-          {title}
+        <div className="eq-popconfirm-container">
+          {/* @ts-ignore */}
+          <div className="eq-popconfirm-content">
+            {/* @ts-ignore */}
+            {<p className="eq-popconfirm-content-title">{title}</p>}
+            {/* @ts-ignore */}
+            {!!description && (
+              <div className="eq-popconfirm-content-description">
+                {description}
+              </div>
+            )}
+          </div>
+
+          {/* @ts-ignore */}
           <div className="eq-popconfirm-buttons">
+            {/* @ts-ignore */}
             <Button
-              type="danger"
               size="compact"
               // @ts-ignore
-              onClick={() => updateOpen(false)}
+              onClick={() => {
+                if (typeof onCancel === 'function') {
+                  onCancel()
+                }
+                setPopconfirmOpen(false)
+              }}
             >
               {cancelText}
             </Button>
             {/* @ts-ignore */}
-            <Button type="primary" size="compact" onClick={onConfirm}>
+            <Button
+              type="primary"
+              size="compact"
+              // @ts-ignore
+              onClick={() => {
+                if (typeof onConfirm === 'function') {
+                  onConfirm()
+                }
+                setPopconfirmOpen(false)
+              }}
+            >
               {okText}
             </Button>
           </div>
-        </>
+        </div>
       }
-      containerStyle={style}
-      contentLocation={popoverPosition}
       {...rest}
     >
-      <div className="eq-popover-wrap" onClick={() => updateOpen(!isOpen)}>
-        {children}
-      </div>
+      {children}
     </Popover>
   )
 }

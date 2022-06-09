@@ -1,24 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { Popover as ReactPopover } from 'react-tiny-popover'
+import { PopoverProps } from './index'
+import { Popover as ReactPopover, ArrowContainer } from 'react-tiny-popover'
 import './Popover.scss'
 
-interface PopoverProps {
-  className: string
-  children: any
-  style: object
-  hasArrow: boolean
-  isPopoverOpen: boolean
-  setIsPopoverOpen: Function
-  content: any
-}
-
 const Popover = ({
-  content = '',
+  content,
   children,
   isPopoverOpen,
   setIsPopoverOpen,
   hasArrow = true,
+  disabled,
+  arrowAttributes = {},
   style = {},
+  position = 'top',
+  align = 'center',
   ...rest
 }: PopoverProps) => {
   const isManual = !!setIsPopoverOpen
@@ -34,22 +29,43 @@ const Popover = ({
   }
 
   return (
+    // @ts-ignore
     <ReactPopover
+      containerClassName="eq-popover-container"
       isOpen={isOpen}
-      positions={['bottom', 'left']}
+      positions={[position, 'top', 'right', 'bottom', 'left']}
       padding={10}
-      reposition={false}
       onClickOutside={() => updateOpen(false)}
-      content={
-        <>
-          {!!hasArrow && <div className="popover-arrow" />}
-          {content}
-        </>
-      }
+      content={({ position: arrowPosition, childRect, popoverRect }) => {
+        return (
+          // @ts-ignore
+          <ArrowContainer
+            position={arrowPosition}
+            childRect={childRect}
+            popoverRect={popoverRect}
+            className={`popover-arrow-container ${arrowPosition}`}
+            arrowClassName={`popover-arrow ${arrowPosition}`}
+            {...(hasArrow && {
+              arrowColor: 'var(--n0)',
+              arrowSize: 9,
+            })}
+            {...arrowAttributes}
+          >
+            {content}
+          </ArrowContainer>
+        )
+      }}
       containerStyle={style}
+      align={align}
       {...rest}
     >
-      <div className="eq-popover-wrap" onClick={() => updateOpen(!isOpen)}>
+      {/* @ts-ignore */}
+      <div
+        className="eq-popover-wrap"
+        onClick={() => {
+          !disabled && updateOpen(!isOpen)
+        }}
+      >
         {children}
       </div>
     </ReactPopover>

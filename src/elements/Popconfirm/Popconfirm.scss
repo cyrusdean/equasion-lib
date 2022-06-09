@@ -1,27 +1,31 @@
-.react-tiny-popover-container {
-  z-index: 20;
+.eq-popconfirm-container {
   background-color: var(--n0);
   padding: 10px;
-  border-radius: 4px;
-  box-sizing: border-box;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 
-  .eq-popconfirm-buttons {
-    display: flex;
-    margin-top: 10px;
-    justify-content: space-between;
-
-    button:first-of-type {
-      margin-right: 10px;
+  .eq-popconfirm-content {
+    &-title {
+      color: var(--n900);
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: 700;
+      margin: 0px;
+      margin-bottom: 10px;
+    }
+    &-description {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
     }
   }
-  .popover-arrow {
-    position: absolute;
-    top: -7px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-bottom: 7px solid var(--n0);
+  .eq-popconfirm-buttons {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+    button {
+      margin: 0px;
+      &:first-of-type {
+        margin-right: 10px;
+      }
+    }
   }
 }
