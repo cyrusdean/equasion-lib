@@ -48,8 +48,8 @@ const AppSelect = ({
   ].join(' ')
 
   useEffect(() => {
-    setCurrentValue(outsideValue)
-    setFilterValue(optionsObj?.[outsideValue] || '')
+    setCurrentValue(multi && !outsideValue ? [] : outsideValue)
+    setFilterValue(outsideValue ? optionsObj[outsideValue] || '' : '')
   }, [outsideValue])
 
   return (
