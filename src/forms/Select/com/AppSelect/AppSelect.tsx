@@ -32,7 +32,7 @@ const AppSelect = ({
           !currentValue.some(
             (selectedOptionValue) => selectedOptionValue === value
           ))) &&
-      String(display).toLowerCase().includes(filterValue.toLowerCase())
+      String(display).toLowerCase().includes(String(filterValue).toLowerCase())
   )
 
   const updateValue = (value) => {
@@ -64,7 +64,8 @@ const AppSelect = ({
               if (
                 !calcedOptions.some(
                   ([, display]) =>
-                    String(display).toLowerCase() === filterValue.toLowerCase()
+                    String(display).toLowerCase() ===
+                    String(filterValue).toLowerCase()
                 ) ||
                 !filterValue
               )
