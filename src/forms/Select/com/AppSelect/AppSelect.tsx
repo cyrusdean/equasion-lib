@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { IoClose } from 'react-icons/io5'
 
 const AppSelect = ({
@@ -7,6 +7,7 @@ const AppSelect = ({
   multi = false,
   onChange,
   defaultValue = '',
+  value: outsideValue,
   iconBefore,
   iconAfter,
   ...rest
@@ -45,6 +46,11 @@ const AppSelect = ({
     iconAfter ? 'icon-after' : '',
     focused ? 'open' : '',
   ].join(' ')
+
+  useEffect(() => {
+    setCurrentValue(outsideValue)
+    setFilterValue(optionsObj?.[outsideValue] || '')
+  }, [outsideValue])
 
   return (
     <div className={combinedClasses}>
