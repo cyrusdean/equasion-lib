@@ -3,6 +3,9 @@
 .eq-select {
   z-index: 2;
 
+  .eq-popover-wrap {
+    width: auto;
+  }
   .options {
     position: absolute;
     width: 100%;
