@@ -8,7 +8,7 @@ export interface PopoverProps {
   arrowAttributes?: object
   hasArrow?: boolean
   disabled?: boolean
-  isPopoverOpen: boolean
+  isPopoverOpen?: boolean
   setIsPopoverOpen?: Function
   content: ReactElement
   position?: PopoverPosition
