@@ -63,22 +63,33 @@
   }
 }
 
-.eq-select-options {
-  width: 100%;
-  background-color: var(--app-color, #ffffff);
-  box-sizing: border-box;
-  border-radius: 3px;
-  padding: 5px 0;
-  max-height: 200px;
-  overflow-y: scroll;
+.eq-select-popover {
+  min-width: unset;
 
-  .option {
-    padding: 5px 10px;
-    cursor: pointer;
+  .popover-arrow-container {
+    min-width: 250px;
+    margin: 0;
+    .popover-arrow {
+      display: none;
+    }
+  }
+  .eq-select-options {
+    width: 100%;
+    background-color: var(--app-color, #ffffff);
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding: 5px 0;
+    max-height: 200px;
+    overflow-y: scroll;
 
-    &.selected,
-    &:hover {
-      background-color: #f5f5f5;
+    .option {
+      padding: 5px 10px;
+      cursor: pointer;
+
+      &.selected,
+      &:hover {
+        background-color: #f5f5f5;
+      }
     }
   }
 }

@@ -57,6 +57,7 @@ const AppSelect = ({
     <div className={combinedClasses}>
       <div style={{ position: 'relative' }}>
         <Popover
+          className="eq-select-popover"
           content={
             <div className="eq-select-options">
               {calcedOptions.length ? (
