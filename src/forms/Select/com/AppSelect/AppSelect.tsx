@@ -117,7 +117,6 @@ const AppSelect = ({
                   )
                     updateValue('')
                 }
-                setPopoverOpen(false)
               }}
               onFocus={() => {
                 setFilterValue('')
