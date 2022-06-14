@@ -92,7 +92,7 @@ const AppSelect = ({
             </div>
           }
           position="bottom"
-          align="center"
+          align="start"
         >
           <>
             <span className="eq-input-icon">{iconBefore}</span>
