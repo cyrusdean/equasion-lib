@@ -55,77 +55,76 @@ const AppSelect = ({
 
   return (
     <div className={combinedClasses}>
-      <div style={{ position: 'relative' }}>
-        <Popover
-          content={
-            <div className="options">
-              {calcedOptions.length ? (
-                calcedOptions.map(([val, display]) => (
-                  <div
-                    key={val}
-                    className={`option ${
-                      filterValue === display ? 'selected' : ''
-                    }`}
-                    onMouseDown={() => {
-                      if (!multi) setFilterValue(display)
-                      else setFilterValue('')
-                      // @ts-ignore
-                      updateValue(multi ? [...currentValue, val] : val)
-                    }}
-                  >
-                    {display}
-                  </div>
-                ))
-              ) : (
+      <Popover
+        style={{ position: 'relative' }}
+        content={
+          <div className="eq-select-options">
+            {calcedOptions.length ? (
+              calcedOptions.map(([val, display]) => (
                 <div
-                  className="option"
+                  key={val}
+                  className={`option ${
+                    filterValue === display ? 'selected' : ''
+                  }`}
                   onMouseDown={() => {
-                    if (!multi) {
-                      setFilterValue('')
-                      updateValue('')
-                    }
+                    if (!multi) setFilterValue(display)
+                    else setFilterValue('')
+                    // @ts-ignore
+                    updateValue(multi ? [...currentValue, val] : val)
                   }}
                 >
-                  - No Options Found -
+                  {display}
                 </div>
-              )}
-            </div>
-          }
-          position="bottom"
-          align="center"
-        >
-          <>
-            <span className="eq-input-icon">{iconBefore}</span>
-            <input
-              {...rest}
-              onChange={({ target }) => setFilterValue(target.value)}
-              onBlur={() => {
-                if (!multi) {
-                  if (
-                    !calcedOptions.some(
-                      ([, display]) =>
-                        String(display).toLowerCase() ===
-                        String(filterValue).toLowerCase()
-                    ) ||
-                    !filterValue
-                  )
+              ))
+            ) : (
+              <div
+                className="option"
+                onMouseDown={() => {
+                  if (!multi) {
+                    setFilterValue('')
                     updateValue('')
-                }
-                setFocused(false)
-              }}
-              onFocus={() => {
-                setFocused(true)
-                setFilterValue('')
-              }}
-              value={filterValue}
-              placeholder=" "
-              autoComplete="off"
-            />
-            <span className="eq-input-icon">{iconAfter}</span>
-            {!!label && <label>{label}</label>}
-          </>
-        </Popover>
-      </div>
+                  }
+                }}
+              >
+                - No Options Found -
+              </div>
+            )}
+          </div>
+        }
+        position="bottom"
+        align="center"
+      >
+        <>
+          <span className="eq-input-icon">{iconBefore}</span>
+          <input
+            {...rest}
+            onChange={({ target }) => setFilterValue(target.value)}
+            onBlur={() => {
+              if (!multi) {
+                if (
+                  !calcedOptions.some(
+                    ([, display]) =>
+                      String(display).toLowerCase() ===
+                      String(filterValue).toLowerCase()
+                  ) ||
+                  !filterValue
+                )
+                  updateValue('')
+              }
+              setFocused(false)
+            }}
+            onFocus={() => {
+              setFocused(true)
+              setFilterValue('')
+            }}
+            value={filterValue}
+            placeholder=" "
+            autoComplete="off"
+          />
+          <span className="eq-input-icon">{iconAfter}</span>
+          {!!label && <label>{label}</label>}
+        </>
+      </Popover>
 
       {/* <div className="options">
         {calcedOptions.length ? (
