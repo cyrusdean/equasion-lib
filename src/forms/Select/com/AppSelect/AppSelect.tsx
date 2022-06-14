@@ -56,7 +56,6 @@ const AppSelect = ({
   return (
     <div className={combinedClasses}>
       <div style={{ position: 'relative' }}>
-        <span className="eq-input-icon">{iconBefore}</span>
         <Popover
           content={
             <div className="options">
@@ -96,35 +95,37 @@ const AppSelect = ({
           position="top"
           align="center"
         >
-          <input
-            {...rest}
-            onChange={({ target }) => setFilterValue(target.value)}
-            onBlur={() => {
-              if (!multi) {
-                if (
-                  !calcedOptions.some(
-                    ([, display]) =>
-                      String(display).toLowerCase() ===
-                      String(filterValue).toLowerCase()
-                  ) ||
-                  !filterValue
-                )
-                  updateValue('')
-              }
-              setFocused(false)
-            }}
-            onFocus={() => {
-              setFocused(true)
-              setFilterValue('')
-            }}
-            value={filterValue}
-            placeholder=" "
-            autoComplete="off"
-          />
+          <>
+            <span className="eq-input-icon">{iconBefore}</span>
+            <input
+              {...rest}
+              onChange={({ target }) => setFilterValue(target.value)}
+              onBlur={() => {
+                if (!multi) {
+                  if (
+                    !calcedOptions.some(
+                      ([, display]) =>
+                        String(display).toLowerCase() ===
+                        String(filterValue).toLowerCase()
+                    ) ||
+                    !filterValue
+                  )
+                    updateValue('')
+                }
+                setFocused(false)
+              }}
+              onFocus={() => {
+                setFocused(true)
+                setFilterValue('')
+              }}
+              value={filterValue}
+              placeholder=" "
+              autoComplete="off"
+            />
+            <span className="eq-input-icon">{iconAfter}</span>
+            {!!label && <label>{label}</label>}
+          </>
         </Popover>
-
-        <span className="eq-input-icon">{iconAfter}</span>
-        {!!label && <label>{label}</label>}
       </div>
 
       {/* <div className="options">
