@@ -45,22 +45,6 @@
       opacity: 1;
     }
   }
-  &.open {
-    .options {
-      padding: 5px 0;
-      max-height: 200px;
-      transition: max-height 0.25s ease-in, padding 0.25s ease-in;
-      overflow-y: scroll;
-    }
-  }
-  &.open ~ {
-    .eq-select,
-    .eq-input,
-    .eq-rangepicker,
-    .eq-datepicker {
-      z-index: 0;
-    }
-  }
 }
 
 .eq-select-popover {

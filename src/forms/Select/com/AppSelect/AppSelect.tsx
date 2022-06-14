@@ -17,7 +17,7 @@ const AppSelect = ({
     (a, [val, display]) => ({ ...a, [val]: display }),
     {}
   )
-  const [focused, setFocused] = useState(false)
+  const [popoverOpen, setPopoverOpen] = useState(false)
   const [filterValue, setFilterValue] = useState(
     defaultValue ? optionsObj[defaultValue] || '' : ''
   )
@@ -45,7 +45,6 @@ const AppSelect = ({
     'eq-select',
     iconBefore ? 'icon-before' : '',
     iconAfter ? 'icon-after' : '',
-    focused ? 'open' : '',
   ].join(' ')
 
   useEffect(() => {
@@ -62,6 +61,8 @@ const AppSelect = ({
           align="start"
           // @ts-ignore
           padding={1}
+          isPopoverOpen={popoverOpen}
+          setIsPopoverOpen={(open) => setPopoverOpen(open)}
           content={
             <div className="eq-select-options">
               {calcedOptions.length ? (
@@ -76,6 +77,7 @@ const AppSelect = ({
                       else setFilterValue('')
                       // @ts-ignore
                       updateValue(multi ? [...currentValue, val] : val)
+                      setPopoverOpen(false)
                     }}
                   >
                     {display}
@@ -88,6 +90,7 @@ const AppSelect = ({
                     if (!multi) {
                       setFilterValue('')
                       updateValue('')
+                      setPopoverOpen(false)
                     }
                   }}
                 >
@@ -114,10 +117,8 @@ const AppSelect = ({
                   )
                     updateValue('')
                 }
-                setFocused(false)
               }}
               onFocus={() => {
-                setFocused(true)
                 setFilterValue('')
               }}
               value={filterValue}
@@ -129,37 +130,6 @@ const AppSelect = ({
           </>
         </Popover>
       </div>
-
-      {/* <div className="options">
-        {calcedOptions.length ? (
-          calcedOptions.map(([val, display]) => (
-            <div
-              key={val}
-              className={`option ${filterValue === display ? 'selected' : ''}`}
-              onMouseDown={() => {
-                if (!multi) setFilterValue(display)
-                else setFilterValue('')
-                // @ts-ignore
-                updateValue(multi ? [...currentValue, val] : val)
-              }}
-            >
-              {display}
-            </div>
-          ))
-        ) : (
-          <div
-            className="option"
-            onMouseDown={() => {
-              if (!multi) {
-                setFilterValue('')
-                updateValue('')
-              }
-            }}
-          >
-            - No Options Found -
-          </div>
-        )}
-      </div> */}
       {!!multi &&
         // @ts-ignore
         currentValue.map((selectedOptionValue) => (
