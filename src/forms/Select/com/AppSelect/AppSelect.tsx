@@ -124,7 +124,9 @@ const AppSelect = ({
         isPopoverOpen={focused}
         position="top"
         align="center"
-      ></Popover>
+      >
+        <div className="options-trigger"></div>
+      </Popover>
       {/* <div className="options">
         {calcedOptions.length ? (
           calcedOptions.map(([val, display]) => (
