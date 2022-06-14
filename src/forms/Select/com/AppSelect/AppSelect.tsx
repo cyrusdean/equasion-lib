@@ -58,6 +58,10 @@ const AppSelect = ({
       <div style={{ position: 'relative' }}>
         <Popover
           className="eq-select-popover"
+          position="bottom"
+          align="start"
+          // @ts-ignore
+          padding={1}
           content={
             <div className="eq-select-options">
               {calcedOptions.length ? (
@@ -92,8 +96,6 @@ const AppSelect = ({
               )}
             </div>
           }
-          position="bottom"
-          align="start"
         >
           <>
             <span className="eq-input-icon">{iconBefore}</span>
