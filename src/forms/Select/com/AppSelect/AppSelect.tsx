@@ -91,8 +91,7 @@ const AppSelect = ({
               )}
             </div>
           }
-          // isPopoverOpen={focused}
-          position="top"
+          position="bottom"
           align="center"
         >
           <>
