@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Popover } from '../../../../elements'
 import { IoClose } from 'react-icons/io5'
 
 const AppSelect = ({
@@ -84,8 +85,47 @@ const AppSelect = ({
         <span className="eq-input-icon">{iconAfter}</span>
         {!!label && <label>{label}</label>}
       </div>
-
-      <div className="options">
+      {/* // @ts-ignore */}
+      <Popover
+        content={
+          <div className="options">
+            {calcedOptions.length ? (
+              calcedOptions.map(([val, display]) => (
+                <div
+                  key={val}
+                  className={`option ${
+                    filterValue === display ? 'selected' : ''
+                  }`}
+                  onMouseDown={() => {
+                    if (!multi) setFilterValue(display)
+                    else setFilterValue('')
+                    // @ts-ignore
+                    updateValue(multi ? [...currentValue, val] : val)
+                  }}
+                >
+                  {display}
+                </div>
+              ))
+            ) : (
+              <div
+                className="option"
+                onMouseDown={() => {
+                  if (!multi) {
+                    setFilterValue('')
+                    updateValue('')
+                  }
+                }}
+              >
+                - No Options Found -
+              </div>
+            )}
+          </div>
+        }
+        isPopoverOpen={focused}
+        position="top"
+        align="center"
+      ></Popover>
+      {/* <div className="options">
         {calcedOptions.length ? (
           calcedOptions.map(([val, display]) => (
             <div
@@ -114,7 +154,7 @@ const AppSelect = ({
             - No Options Found -
           </div>
         )}
-      </div>
+      </div> */}
       {!!multi &&
         // @ts-ignore
         currentValue.map((selectedOptionValue) => (
