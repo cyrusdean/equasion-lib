@@ -1,0 +1,56 @@
+.eq-filter-container {
+  position: relative;
+  padding: 10px;
+  font-size: 1.4rem;
+  padding-top: 15px;
+  width: fit-content;
+  .close-filter {
+    font-size: 2rem;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #00000040;
+    cursor: pointer;
+  }
+  .filter-options {
+    .eq-checkbox {
+      margin: 5px 0px;
+      label {
+        font-size: 1.4rem;
+      }
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .search-buttons {
+    display: flex;
+    button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      display: inline-block;
+      font-size: 1.4rem;
+      line-height: 2rem;
+      padding: 4px 12px;
+      border-radius: 4px;
+
+      &.clear-search-button {
+        color: var(--n500);
+
+        &:hover {
+          color: var(--primaryColor);
+        }
+      }
+      &.search-button {
+        margin-left: auto;
+        color: #ffffff;
+        background-color: var(--primaryColor);
+        &:hover {
+          filter: brightness(1.2);
+        }
+      }
+    }
+  }
+}

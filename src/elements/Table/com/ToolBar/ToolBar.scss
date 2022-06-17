@@ -1,0 +1,21 @@
+.eq-column-tool-bar {
+  display: flex;
+  align-items: center;
+  position: relative;
+  .column-title {
+    margin-right: 10px;
+  }
+
+  .search-icon,
+  .filter-icon {
+    cursor: pointer;
+    margin-right: 5px;
+    padding: 5px;
+    &.searching {
+      fill: var(--primaryColor);
+    }
+    &.filtering {
+      color: var(--primaryColor);
+    }
+  }
+}
