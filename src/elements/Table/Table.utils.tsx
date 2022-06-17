@@ -1,70 +1,67 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
 interface TableFilter {
-  id: string;
-  active: boolean;
+  id: string
+  active: boolean
 }
 
 /* Functions used for filter FILTER */
 const filterFunctionMatches = (record, filterFunc, filterValues) => {
   // At least one of the filtered values applies to this record is the result
-  const result = filterValues.some((value) => filterFunc(value, record));
-  console.log('filter result in custom hook', result);
-  return result;
-};
+  const result = filterValues.some((value) => filterFunc(value, record))
+  return result
+}
 /* end of filter FILTER functions */
 
 /* Functions used for SEARCH FILTER */
 export const getValueFromPath = (record, path) => {
-  return path.split('.').reduce((r, k) => r?.[k] ?? '', record);
-};
+  return path.split('.').reduce((r, k) => r?.[k] ?? '', record)
+}
 
 const runSearchFilter = (record, key, searchValue) => {
-  console.log('key', key);
   const value =
-    key instanceof Function ? key(record) : getValueFromPath(record, key) || '';
+    key instanceof Function ? key(record) : getValueFromPath(record, key) || ''
 
-  return String(value).toLowerCase().includes(searchValue.toLowerCase());
-};
+  return String(value).toLowerCase().includes(searchValue.toLowerCase())
+}
 /* end of SEARCH FILTER functions */
 
 const applyFilters = (records, filters) => {
-  let filteredRecords = [...records];
-  console.log('records', records);
-  console.log('filters', filters);
+  let filteredRecords = [...records]
+
   filters.forEach((filter) => {
-    const { active, type, key, value, onFilter } = filter || {};
+    const { active, type, key, value, onFilter } = filter || {}
     if (active) {
       if (type === 'search') {
         filteredRecords = filteredRecords.filter((record) =>
           runSearchFilter(record, key, value)
-        );
+        )
       } else if (type === 'filter') {
         filteredRecords = filteredRecords.filter((record) =>
           filterFunctionMatches(record, onFilter, value)
-        );
+        )
       }
     }
-  });
-  console.log('filteredRecords in here', filteredRecords);
-  return filteredRecords;
-};
+  })
+
+  return filteredRecords
+}
 
 const useRecordManager = (initialRecords) => {
-  const [records, setRecords] = useState(initialRecords);
-  const [tableFilters, setTableFilters] = useState([]);
-  console.log('filters inside hook', tableFilters);
+  const [records, setRecords] = useState(initialRecords)
+  const [tableFilters, setTableFilters] = useState([])
+
   const [filteredRecords, setFilteredRecords] = useState(
     applyFilters(records, tableFilters)
-  );
+  )
 
   // Used for tool bar to register its filters
   const registerFilter = (filter: TableFilter) => {
     setTableFilters((existingFilters) => [
       ...existingFilters.filter((f) => f.id !== filter.id),
-      filter
-    ]);
-  };
+      filter,
+    ])
+  }
 
   // Used for an individual filter to update its state
   const updateFilterState = (filterId, updatedState = {}) => {
@@ -72,18 +69,18 @@ const useRecordManager = (initialRecords) => {
       fs.map((filter) =>
         filter.id === filterId ? { ...filter, ...updatedState } : filter
       )
-    );
-  };
+    )
+  }
 
   // If the initial data ever changes update records to new dataset
   useEffect(() => {
-    setRecords(initialRecords);
-  }, [initialRecords]);
+    setRecords(initialRecords)
+  }, [initialRecords])
 
   // When the records or filters change then update the filtered records
   useEffect(() => {
-    setFilteredRecords(applyFilters(records, tableFilters));
-  }, [tableFilters, records]);
+    setFilteredRecords(applyFilters(records, tableFilters))
+  }, [tableFilters, records])
 
   return {
     records,
@@ -93,16 +90,14 @@ const useRecordManager = (initialRecords) => {
     filteredRecords,
     setFilteredRecords,
     updateFilterState,
-    registerFilter
-  };
-};
+    registerFilter,
+  }
+}
 
 export const defaultSort = (a, b) => {
-  console.log('A:', a);
-  console.log('B:', b);
-  if (a < b) return -1;
-  if (a > b) return 1;
-  return 0;
-};
+  if (a < b) return -1
+  if (a > b) return 1
+  return 0
+}
 
-export default useRecordManager;
+export default useRecordManager

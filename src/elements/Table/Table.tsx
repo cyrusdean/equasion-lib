@@ -35,8 +35,6 @@ const DefaultTable = ({
     }
     // Only sortable would result in the default sort function
     // by including the sort key the row will be reduced to a value
-    console.log('sortable', sortable)
-    console.log('key', key)
     if (sortable && key) {
       // If a sort function has NOT been passed in
       if (!(sortFunction instanceof Function)) {
@@ -47,11 +45,6 @@ const DefaultTable = ({
             key instanceof Function
               ? (rowA, rowB) => defaultSort(key(rowA), key(rowB))
               : (rowA, rowB) => {
-                  const getA = getValueFromPath(rowA, key)
-                  console.log('getA', getA)
-                  const getB = getValueFromPath(rowB, key)
-                  console.log('getB', getB)
-
                   return defaultSort(
                     getValueFromPath(rowA, key),
                     getValueFromPath(rowB, key)
