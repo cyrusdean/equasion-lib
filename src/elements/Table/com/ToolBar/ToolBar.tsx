@@ -1,28 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { ToolBarProps } from '.';
-import { TableSearch, TableFilter } from './com';
-import './ToolBar.scss';
+import React, { useState, useEffect } from 'react'
+import { ToolBarProps } from '.'
+import { TableSearch, TableFilter } from './com'
+import { generateFilterkey } from '../../Table.utils'
+import './ToolBar.scss'
+
+const getToolId = (type) => `${generateFilterkey()}-${type}`
 
 const Toolbar = ({
   column,
   tableFilters,
   registerFilter,
-  updateFilterState
+  updateFilterState,
 }: ToolBarProps) => {
-  const { name, key, searchable, filters, onFilter, filterKey } = column || {};
-  const [tools, setTools] = useState([]);
+  const { name, searchable, filters, onFilter, filterKey } = column || {}
+  const [tools, setTools] = useState([])
 
   // Sets up the tool bars filters depending on the column props
   useEffect(() => {
-    const requestedTools = [];
-    if (searchable && key) requestedTools.push('search');
+    const requestedTools = []
+    if (searchable) requestedTools.push('search')
     if (filters && Array.isArray(filters) && typeof onFilter === 'function')
-      requestedTools.push('filter');
-    setTools(requestedTools);
-  }, [column]);
+      requestedTools.push('filter')
+    setTools(requestedTools)
+  }, [column])
 
-  const searchFilterId = `${filterKey}-search`;
-  const filterFilterId = `${filterKey}-filter`;
+  const searchFilterId = filterKey || getToolId('search')
+  const filterFilterId = filterKey || getToolId('filter')
   return (
     <div className="eq-column-tool-bar">
       <span className="column-title">{name}</span>
@@ -46,7 +49,7 @@ const Toolbar = ({
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Toolbar;
+export default Toolbar
