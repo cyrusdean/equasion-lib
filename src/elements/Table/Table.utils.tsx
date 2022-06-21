@@ -5,6 +5,10 @@ interface TableFilter {
   active: boolean
 }
 
+// generates a random string to be used as a filterId
+export const generateFilterkey = () =>
+  Math.random().toString(36).substring(2, 7)
+
 /* Functions used for filter FILTER */
 const filterFunctionMatches = (record, filterFunc, filterValues) => {
   // At least one of the filtered values applies to this record is the result
@@ -14,7 +18,7 @@ const filterFunctionMatches = (record, filterFunc, filterValues) => {
 /* end of filter FILTER functions */
 
 /* Functions used for SEARCH FILTER */
-export const getValueFromPath = (record, path) => {
+export const getValueFromPath = (record, path = '') => {
   return path.split('.').reduce((r, k) => r?.[k] ?? '', record)
 }
 
