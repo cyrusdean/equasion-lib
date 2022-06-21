@@ -15,12 +15,13 @@ const DefaultTable = ({
   onRowClicked,
   expandableRows,
   ...rest
-}: IEqTableProps & IDataTableProps) => {
+}: // @ts-ignore
+IEqTableProps & IDataTableProps) => {
   const { filteredRecords, tableFilters, updateFilterState, registerFilter } =
     useRecordManager(data)
 
   const columns = defaultColumns.map((column) => {
-    const { selector, sortable, key, sortFunction } = column
+    const { selector, sortable, sortFunction, key: originalKey } = column
 
     let newColumn = { ...column }
 
@@ -31,11 +32,14 @@ const DefaultTable = ({
         selector: (record) => {
           return getValueFromPath(record, selector)
         },
+        // Whenever the selector is a string and not a default key - the key defaults to the selector
+        ...(!originalKey && { key: selector }),
       }
     }
-    // Only sortable would result in the default sort function
-    // by including the sort key the row will be reduced to a value
-    if (sortable && key) {
+    // Grab key from column (will be defaulted to selector if selector is a string)
+    const { key } = newColumn
+    // If the sortable flag has been passed in
+    if (sortable) {
       // If a sort function has NOT been passed in
       if (!(sortFunction instanceof Function)) {
         // Reduce the row to the value that represents it and default sort
