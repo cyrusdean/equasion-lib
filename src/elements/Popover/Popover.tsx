@@ -14,6 +14,7 @@ const Popover = ({
   style = {},
   position = 'top',
   align = 'center',
+  className = '',
   ...rest
 }: PopoverProps) => {
   const isManual = !!setIsPopoverOpen
@@ -31,7 +32,7 @@ const Popover = ({
   return (
     // @ts-ignore
     <ReactPopover
-      containerClassName="eq-popover-container"
+      containerClassName={['eq-popover-container', className].join(' ')}
       isOpen={isOpen}
       positions={[position, 'top', 'right', 'bottom', 'left']}
       padding={10}

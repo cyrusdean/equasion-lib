@@ -1,43 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import { Checkbox, Popover } from 'equasion-lib';
-import { FiFilter } from 'react-icons/fi';
-import { IoClose } from 'react-icons/io5';
-import { TableFilterProps } from './';
-import './TableFilter.scss';
+import React, { useState, useEffect } from 'react'
+import Popover from '../../../../../Popover'
+import Checkbox from '../../../../../../forms/Checkbox'
+import { FiFilter } from 'react-icons/fi'
+import { IoClose } from 'react-icons/io5'
+import { TableFilterProps } from './'
+import './TableFilter.scss'
 
 const TableFilter = ({
   filter,
   column,
   filterId,
   registerFilter,
-  updateFilterState
+  updateFilterState,
 }: TableFilterProps) => {
-  const { filters } = column;
+  const { filters } = column
 
-  const [open, setOpen] = useState(false);
-  const [filterValues, setFilterValues] = useState([]);
+  const [open, setOpen] = useState(false)
+  const [filterValues, setFilterValues] = useState([])
 
   useEffect(() => {
-    const { onFilter } = column || {};
+    const { onFilter } = column || {}
     registerFilter({
       id: filterId,
       active: false,
       onFilter,
       type: 'filter',
-      value: filterValues
-    });
-  }, []);
+      value: filterValues,
+    })
+  }, [])
 
   const runSearch = () => {
-    setOpen(false);
-    updateFilterState(filterId, { active: true, value: filterValues });
-  };
+    setOpen(false)
+    updateFilterState(filterId, { active: true, value: filterValues })
+  }
 
   const resetSearch = () => {
-    setFilterValues([]);
-    updateFilterState(filterId, { active: false, value: [] });
-    setOpen(false);
-  };
+    setFilterValues([])
+    updateFilterState(filterId, { active: false, value: [] })
+    setOpen(false)
+  }
 
   return (
     <Popover
@@ -49,16 +50,16 @@ const TableFilter = ({
         <div
           className={`eq-filter-container ${open ? 'open' : ''}`}
           onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
+            e.preventDefault()
+            e.stopPropagation()
           }}
         >
           <IoClose
             className="close-filter"
             onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setOpen(false);
+              e.preventDefault()
+              e.stopPropagation()
+              setOpen(false)
             }}
           />
           <div className="filter-options">
@@ -69,11 +70,11 @@ const TableFilter = ({
                 label={label}
                 defaultValue={filterValues.includes(value)}
                 onChange={(e) => {
-                  const { value: checked } = e || {};
+                  const { value: checked } = e || {}
                   if (checked && !filterValues.includes(value)) {
-                    setFilterValues((fvs) => [...fvs, value]);
+                    setFilterValues((fvs) => [...fvs, value])
                   } else if (!checked && filterValues.includes(value)) {
-                    setFilterValues((fvs) => fvs.filter((fv) => fv !== value));
+                    setFilterValues((fvs) => fvs.filter((fv) => fv !== value))
                   }
                 }}
               />
@@ -94,13 +95,13 @@ const TableFilter = ({
       <FiFilter
         className={`filter-icon ${filter && filter.active ? 'filtering' : ''}`}
         onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          setOpen(!open);
+          e.preventDefault()
+          e.stopPropagation()
+          setOpen(!open)
         }}
       />
     </Popover>
-  );
-};
+  )
+}
 
-export default TableFilter;
+export default TableFilter

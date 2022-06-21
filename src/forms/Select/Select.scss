@@ -3,6 +3,9 @@
 .eq-select {
   z-index: 2;
 
+  .eq-popover-wrap {
+    width: auto;
+  }
   .options {
     position: absolute;
     width: 100%;
@@ -42,20 +45,35 @@
       opacity: 1;
     }
   }
-  &.open {
-    .options {
-      padding: 5px 0;
-      max-height: 200px;
-      transition: max-height 0.25s ease-in, padding 0.25s ease-in;
-      overflow-y: scroll;
+}
+
+.eq-select-popover {
+  min-width: unset;
+
+  .popover-arrow-container {
+    min-width: 250px;
+    margin: 0;
+    .popover-arrow {
+      display: none;
     }
   }
-  &.open ~ {
-    .eq-select,
-    .eq-input,
-    .eq-rangepicker,
-    .eq-datepicker {
-      z-index: 0;
+  .eq-select-options {
+    width: 100%;
+    background-color: var(--app-color, #ffffff);
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding: 5px 0;
+    max-height: 200px;
+    overflow-y: scroll;
+
+    .option {
+      padding: 5px 10px;
+      cursor: pointer;
+
+      &.selected,
+      &:hover {
+        background-color: #f5f5f5;
+      }
     }
   }
 }

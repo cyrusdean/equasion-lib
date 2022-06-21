@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Field } from 'formik'
+import { Popover } from '../../../../elements'
 import { FiXCircle } from 'react-icons/fi'
 import { IoClose } from 'react-icons/io5'
 import get from 'lodash.get'
@@ -21,7 +22,7 @@ const FormWrappedSelect = ({
   )
   const fieldName = field.name
   const error = get(form.errors, fieldName)
-  const [focused, setFocused] = useState(false)
+  const [popoverOpen, setPopoverOpen] = useState(false)
   const [filterValue, setFilterValue] = useState(
     multi ? '' : optionsObj[form.values[fieldName]] || ''
   )
@@ -43,78 +44,98 @@ const FormWrappedSelect = ({
     iconBefore ? 'icon-before' : '',
     iconAfter ? 'icon-after' : '',
     errorExistsAndFieldTouched ? 'error' : '',
-    focused ? 'open' : '',
   ].join(' ')
 
   return (
     <div className={combinedClasses}>
       <div style={{ position: 'relative' }}>
-        <span className="eq-input-icon">{iconBefore}</span>
-        <input
-          {...field}
-          {...rest}
-          onChange={({ target }) => setFilterValue(target.value)}
-          onBlur={() => {
-            if (!multi) {
-              if (
-                !calcedOptions.some(
-                  ([, display]) =>
-                    String(display).toLowerCase() === filterValue.toLowerCase()
-                )
-              )
-                form.setFieldValue(fieldName, '')
-              else if (formValue && !!filterValue)
-                setFilterValue(optionsObj[formValue])
-              else if (!filterValue) form.setFieldValue(fieldName, '')
-            }
-            setFocused(false)
-          }}
-          onFocus={() => {
-            setFocused(true)
-            setFilterValue('')
-          }}
-          value={filterValue}
-          id={fieldName}
-          placeholder=" "
-          autoComplete="off"
-        />
-        <span className="eq-input-icon">{iconAfter}</span>
-        {!!label && <label>{label}</label>}
-        {!!errorExistsAndFieldTouched && (
-          <div className="error-message">
-            <FiXCircle /> {error}
-          </div>
-        )}
-      </div>
-
-      <div className="options">
-        {calcedOptions.length ? (
-          calcedOptions.map(([val, display]) => (
-            <div
-              key={val}
-              className={`option ${filterValue === display ? 'selected' : ''}`}
-              onMouseDown={() => {
-                if (!multi) setFilterValue(display)
-                else setFilterValue('')
-                form.setFieldValue(fieldName, multi ? [...formValue, val] : val)
-              }}
-            >
-              {display}
+        <Popover
+          className="eq-select-popover"
+          position="bottom"
+          align="start"
+          // @ts-ignore
+          padding={1}
+          isPopoverOpen={popoverOpen}
+          setIsPopoverOpen={(open) => setPopoverOpen(open)}
+          content={
+            <div className="eq-select-options">
+              {calcedOptions.length ? (
+                calcedOptions.map(([val, display]) => (
+                  <div
+                    key={val}
+                    className={`option ${
+                      filterValue === display ? 'selected' : ''
+                    }`}
+                    onMouseDown={() => {
+                      if (!multi) setFilterValue(display)
+                      else setFilterValue('')
+                      form.setFieldValue(
+                        fieldName,
+                        multi ? [...formValue, val] : val
+                      )
+                      setPopoverOpen(false)
+                    }}
+                  >
+                    {display}
+                  </div>
+                ))
+              ) : (
+                <div
+                  className="option"
+                  onMouseDown={() => {
+                    if (!multi) {
+                      setFilterValue('')
+                      form.setFieldValue(fieldName, '')
+                      setPopoverOpen(false)
+                    }
+                  }}
+                >
+                  - No Options Found -
+                </div>
+              )}
             </div>
-          ))
-        ) : (
-          <div
-            className="option"
-            onMouseDown={() => {
-              if (!multi) {
+          }
+        >
+          <>
+            <span className="eq-input-icon">{iconBefore}</span>
+            <input
+              {...field}
+              {...rest}
+              onChange={({ target }) => setFilterValue(target.value)}
+              onBlur={() => {
+                if (!multi) {
+                  if (
+                    !calcedOptions.some(
+                      ([, display]) =>
+                        String(display).toLowerCase() ===
+                        filterValue.toLowerCase()
+                    )
+                  )
+                    form.setFieldValue(fieldName, '')
+                  else if (formValue && !!filterValue)
+                    setFilterValue(optionsObj[formValue])
+                  else if (!filterValue) form.setFieldValue(fieldName, '')
+                }
+                setPopoverOpen(false)
+              }}
+              onFocus={() => {
+                // setPopoverOpen(false)
                 setFilterValue('')
-                form.setFieldValue(fieldName, '')
-              }
-            }}
-          >
-            - No Options Found -
-          </div>
-        )}
+              }}
+              value={filterValue}
+              id={fieldName}
+              placeholder=" "
+              autoComplete="off"
+            />
+            <span className="eq-input-icon">{iconAfter}</span>
+            {!!label && <label>{label}</label>}
+            {!!errorExistsAndFieldTouched && (
+              <div className="error-message">
+                <FiXCircle /> {error}
+              </div>
+            )}
+          </>
+        </Popover>
       </div>
       {!!multi &&
         formValue.map((selectedOptionValue) => (

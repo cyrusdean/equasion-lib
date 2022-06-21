@@ -1,40 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import { Popover } from 'equasion-lib';
-import { BsSearch } from 'react-icons/bs';
-import { IoClose } from 'react-icons/io5';
-import { TableSearchProps } from './';
-import './TableSearch.scss';
+import React, { useState, useEffect } from 'react'
+import Popover from '../../../../../Popover'
+import { BsSearch } from 'react-icons/bs'
+import { IoClose } from 'react-icons/io5'
+import { TableSearchProps } from './'
+import './TableSearch.scss'
 
 const TableSearch = ({
   filterId,
   filter,
   column,
   registerFilter,
-  updateFilterState
+  updateFilterState,
 }: TableSearchProps) => {
-  const [open, setOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
+  const [open, setOpen] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
 
   useEffect(() => {
-    const { key } = column || {};
+    const { key } = column || {}
     registerFilter({
       id: filterId,
       active: false,
       key,
       type: 'search',
-      value: searchValue
-    });
-  }, []);
+      value: searchValue,
+    })
+  }, [])
   const runSearch = () => {
-    setOpen(false);
-    updateFilterState(filterId, { active: true, value: searchValue });
-  };
+    setOpen(false)
+    updateFilterState(filterId, { active: true, value: searchValue })
+  }
 
   const resetSearch = () => {
-    setSearchValue('');
-    updateFilterState(filterId, { active: false, value: '' });
-    setOpen(false);
-  };
+    setSearchValue('')
+    updateFilterState(filterId, { active: false, value: '' })
+    setOpen(false)
+  }
 
   return (
     <Popover
@@ -45,14 +45,14 @@ const TableSearch = ({
         <div
           className={`eq-search-box ${open ? 'open' : ''}`}
           onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
+            e.preventDefault()
+            e.stopPropagation()
           }}
         >
           <IoClose
             className="close-search"
-            onClick={(e) => {
-              setOpen(false);
+            onClick={() => {
+              setOpen(false)
             }}
           />
 
@@ -82,13 +82,13 @@ const TableSearch = ({
       <BsSearch
         className={`search-icon ${filter && filter.active ? 'searching' : ''}`}
         onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          setOpen(!open);
+          e.preventDefault()
+          e.stopPropagation()
+          setOpen(!open)
         }}
       />
     </Popover>
-  );
-};
+  )
+}
 
-export default TableSearch;
+export default TableSearch

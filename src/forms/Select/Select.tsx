@@ -18,6 +18,7 @@ interface SelectOnlyProps {
   options: any[]
   multi: boolean
   defaultValue: string
+  value: string
 }
 
 type SelectProps = InputProps & SelectOnlyProps
