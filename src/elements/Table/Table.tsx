@@ -15,7 +15,8 @@ const DefaultTable = ({
   onRowClicked,
   expandableRows,
   ...rest
-}: IEqTableProps & IDataTableProps) => {
+}: // @ts-ignore
+IEqTableProps & IDataTableProps) => {
   const { filteredRecords, tableFilters, updateFilterState, registerFilter } =
     useRecordManager(data)
 
