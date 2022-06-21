@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Table from 'react-data-table-component'
 import type { IDataTableProps } from 'react-data-table-component'
-import { TableSearch } from '../'
+import ToolBar from './com/ToolBar'
+import useRecordManager, { defaultSort, getValueFromPath } from './Table.utils'
 
 interface IEqTableProps {
   dataName?: string
 }
-
-const get = (t, path) => path.split('.').reduce((r, k) => r?.[k] ?? '', t)
 
 const DefaultTable = ({
   data,
@@ -16,40 +15,64 @@ const DefaultTable = ({
   onRowClicked,
   expandableRows,
   ...rest
-}: // @ts-ignore
-IEqTableProps & IDataTableProps) => {
-  const [records, setRecords] = useState(data)
+}: IEqTableProps & IDataTableProps) => {
+  const { filteredRecords, tableFilters, updateFilterState, registerFilter } =
+    useRecordManager(data)
 
   const columns = defaultColumns.map((column) => {
-    const { name, selector, searchKey } = column
+    const { selector, sortable, key, sortFunction } = column
+
     let newColumn = { ...column }
 
-    if (typeof selector === 'string')
-      newColumn = { ...newColumn, selector: (record) => get(record, selector) }
-
-    if (searchKey)
+    // The table columns don't accept strings
+    if (typeof selector === 'string') {
       newColumn = {
         ...newColumn,
-        name: (
-          <TableSearch
-            title={name}
-            searchKey={searchKey}
-            records={records}
-            setRecords={setRecords}
-          />
-        ),
+        selector: (record) => {
+          return getValueFromPath(record, selector)
+        },
       }
+    }
+    // Only sortable would result in the default sort function
+    // by including the sort key the row will be reduced to a value
+    if (sortable && key) {
+      // If a sort function has NOT been passed in
+      if (!(sortFunction instanceof Function)) {
+        // Reduce the row to the value that represents it and default sort
+        newColumn = {
+          ...newColumn,
+          sortFunction:
+            key instanceof Function
+              ? (rowA, rowB) => defaultSort(key(rowA), key(rowB))
+              : (rowA, rowB) => {
+                  return defaultSort(
+                    getValueFromPath(rowA, key),
+                    getValueFromPath(rowB, key)
+                  )
+                },
+        }
+      }
+    }
+
+    // Have the toolBar decide what is rendered
+    newColumn = {
+      ...newColumn,
+      name: (
+        <ToolBar
+          column={column}
+          updateFilterState={updateFilterState}
+          registerFilter={registerFilter}
+          tableFilters={tableFilters}
+        />
+      ),
+    }
 
     return newColumn
   })
 
-  useEffect(() => {
-    setRecords(data)
-  }, [data])
-
   return (
     <Table
-      data={records}
+      data={filteredRecords}
       columns={columns}
       pointerOnHover={!!onRowClicked || !!expandableRows}
       noDataComponent={`There are no ${dataName}.`}
