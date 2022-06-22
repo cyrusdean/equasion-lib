@@ -1,17 +1,18 @@
-import { TableFilterType } from '../.';
+import { TableFilterType } from '../.'
 
 type Column = {
-  key: string;
-  onFilter: Function;
-  filters: any[];
-};
-
-export interface TableFilterProps {
-  filterId: string;
-  filter: TableFilterType;
-  column: Column;
-  registerFilter: Function;
-  updateFilterState: Function;
+  key: string
+  onFilter: Function
+  filters: any[]
+  filterKey?: string
 }
 
-export { default } from './TableFilter';
+export interface TableFilterProps {
+  filterId: string
+  tableFilters: TableFilterType
+  column: Column
+  registerFilter: Function
+  updateFilterState: Function
+}
+
+export { default } from './TableFilter'
