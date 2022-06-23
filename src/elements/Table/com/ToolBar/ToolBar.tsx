@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ToolBarProps } from '.'
 import { TableSearch, TableFilter } from './com'
-import { generateFilterkey } from '../../Table.utils'
 import './ToolBar.scss'
-
-const getToolId = (type) => `${generateFilterkey()}-${type}`
 
 const Toolbar = ({
   column,
@@ -12,8 +9,8 @@ const Toolbar = ({
   registerFilter,
   updateFilterState,
 }: ToolBarProps) => {
-  const { name, searchable, filters, onFilter, filterKey } = column || {}
-  const [tools, setTools] = useState([])
+  const { name, searchable, filters, onFilter } = column || {}
+  const [tools, setTools] = useState<string[]>([])
 
   // Sets up the tool bars filters depending on the column props
   useEffect(() => {
@@ -24,16 +21,13 @@ const Toolbar = ({
     setTools(requestedTools)
   }, [column])
 
-  const searchFilterId = filterKey || getToolId('search')
-  const filterFilterId = filterKey || getToolId('filter')
   return (
     <div className="eq-column-tool-bar">
       <span className="column-title">{name}</span>
 
       {tools.includes('search') && (
         <TableSearch
-          filterId={searchFilterId}
-          filter={tableFilters.find((f) => f.id === searchFilterId)}
+          tableFilters={tableFilters}
           column={column}
           registerFilter={registerFilter}
           updateFilterState={updateFilterState}
@@ -41,8 +35,7 @@ const Toolbar = ({
       )}
       {tools.includes('filter') && (
         <TableFilter
-          filterId={filterFilterId}
-          filter={tableFilters.find((f) => f.id === filterFilterId)}
+          tableFilters={tableFilters}
           column={column}
           registerFilter={registerFilter}
           updateFilterState={updateFilterState}

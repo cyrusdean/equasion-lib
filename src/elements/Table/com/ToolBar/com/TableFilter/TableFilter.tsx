@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import Popover from '../../../../../Popover'
 import Checkbox from '../../../../../../forms/Checkbox'
+import { generateFilterkey } from '../../../../Table.utils'
 import { FiFilter } from 'react-icons/fi'
 import { IoClose } from 'react-icons/io5'
 import { TableFilterProps } from './'
 import './TableFilter.scss'
 
 const TableFilter = ({
-  filter,
   column,
-  filterId,
+  tableFilters,
   registerFilter,
   updateFilterState,
 }: TableFilterProps) => {
   const { filters } = column
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState<boolean>(false)
   const [filterValues, setFilterValues] = useState([])
+  const [filterId, setFilterId] = useState<string>()
+  const filter = tableFilters.find((f) => f.id === filterId)
 
   useEffect(() => {
-    const { onFilter } = column || {}
+    const { onFilter, filterKey } = column || {}
+    const filterId = filterKey || generateFilterkey()
+
     registerFilter({
       id: filterId,
       active: false,
@@ -27,11 +31,15 @@ const TableFilter = ({
       type: 'filter',
       value: filterValues,
     })
+    setFilterId(filterId)
   }, [])
 
   const runSearch = () => {
     setOpen(false)
-    updateFilterState(filterId, { active: true, value: filterValues })
+
+    if (filterValues.length) {
+      updateFilterState(filterId, { active: true, value: filterValues })
+    }
   }
 
   const resetSearch = () => {
