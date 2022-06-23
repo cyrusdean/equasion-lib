@@ -1,16 +1,16 @@
 export interface TableFilterType {
-  id: string;
-  active: boolean;
-  onfilter?: Function;
-  type: string;
-  value: string | any[];
+  id: string
+  active: boolean
+  onfilter?: Function
+  type: string
+  value: string | any[]
 }
 
 export interface ToolBarProps {
-  column: any;
-  tableFilters: TableFilterType[];
-  registerFilter: Function;
-  updateFilterState: Function;
+  column: any
+  tableFilters: TableFilterType[]
+  registerFilter: Function
+  updateFilterState: Function
 }
 
-export { default } from './ToolBar';
+export { default } from './ToolBar'

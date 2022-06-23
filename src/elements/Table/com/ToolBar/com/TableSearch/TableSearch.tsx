@@ -1,29 +1,33 @@
 import React, { useState, useEffect } from 'react'
 import Popover from '../../../../../Popover'
+import { generateFilterkey } from '../../../../Table.utils'
 import { BsSearch } from 'react-icons/bs'
 import { IoClose } from 'react-icons/io5'
 import { TableSearchProps } from './'
 import './TableSearch.scss'
 
 const TableSearch = ({
-  filterId,
-  filter,
+  tableFilters,
   column,
   registerFilter,
   updateFilterState,
 }: TableSearchProps) => {
-  const [open, setOpen] = useState(false)
-  const [searchValue, setSearchValue] = useState('')
+  const [open, setOpen] = useState<boolean | null>(false)
+  const [searchValue, setSearchValue] = useState<string>('')
+  const [filterId, setFilterId] = useState<string>()
+  const filter = tableFilters.find((f) => f.id === filterId)
 
   useEffect(() => {
-    const { key } = column || {}
+    const { key, filterKey } = column || {}
+    const searchFilterId = filterKey || generateFilterkey()
     registerFilter({
-      id: filterId,
+      id: searchFilterId,
       active: false,
       key,
       type: 'search',
       value: searchValue,
     })
+    setFilterId(searchFilterId)
   }, [])
   const runSearch = () => {
     setOpen(false)

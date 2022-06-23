@@ -63,7 +63,7 @@ IEqTableProps & IDataTableProps) => {
       ...newColumn,
       name: (
         <ToolBar
-          column={column}
+          column={newColumn}
           updateFilterState={updateFilterState}
           registerFilter={registerFilter}
           tableFilters={tableFilters}
