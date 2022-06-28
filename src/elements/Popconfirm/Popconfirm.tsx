@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Popover } from '../index'
+import Button from '../Button'
+import Popover from '../Popover'
 import { PopconfirmProps } from './index'
 
 import './Popconfirm.scss'
