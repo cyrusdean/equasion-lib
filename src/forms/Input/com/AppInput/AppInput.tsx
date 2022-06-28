@@ -28,7 +28,7 @@ const AppInput = ({
             if (inputType === 'number') updateValue(+target.value)
             else updateValue(target.value)
           }}
-          onChange={({ target }) => {
+          onInput={({ target }) => {
             if (inputType === 'number' && !!target.value)
               updateValue(+target.value)
             else updateValue(target.value)

@@ -36,7 +36,7 @@ const FormWrappedInput = ({
               form.setFieldValue(field.name, +target.value)
             else form.setFieldValue(field.name, target.value)
           }}
-          onChange={({ target }) => {
+          onInput={({ target }) => {
             if (inputType === 'number' && !!target.value)
               setValue(+target.value)
             else setValue(target.value)
