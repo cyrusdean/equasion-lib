@@ -23,7 +23,8 @@
       right: 20px;
     }
   }
-  input {
+  input,
+  textarea {
     display: block;
     border: 1px solid var(--borderColor);
     border-radius: 8px;
@@ -69,10 +70,14 @@
       }
     }
   }
-  .error input {
-    padding-left: 9px;
+  .error {
+    input,
+    textarea {
+      padding-left: 9px;
+    }
   }
-  input {
+  input,
+  textarea {
     &:hover,
     &:focus,
     &:focus-visible {
@@ -95,7 +100,8 @@
     transition: all 0.2s linear;
   }
   &.icon-before {
-    input {
+    input,
+    textarea {
       padding-left: 35px;
 
       &:not(:placeholder-shown),
@@ -118,12 +124,14 @@
     }
   }
   &.icon-after {
-    input {
+    input,
+    textarea {
       padding-right: 30px;
     }
   }
   &.error {
-    input {
+    input,
+    textarea {
       border: 2px solid var(--error);
 
       &:-webkit-autofill,
