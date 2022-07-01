@@ -3,6 +3,9 @@
 .eq-datepicker {
   z-index: 1;
 
+  .eq-popover-wrap {
+    width: auto;
+  }
   input {
     text-decoration: transparent;
     cursor: pointer;
