@@ -24,4 +24,6 @@
 
 .eq-datepicker-popover .eq-popover-container .popover-arrow-container {
   box-shadow: none;
+  // Looks like this important is absolutely necessary to override
+  padding: 0 !important;
 }
