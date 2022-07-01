@@ -24,13 +24,12 @@ const FormWrappedDatePicker = ({
     iconBefore ? 'icon-before' : '',
     iconAfter ? 'icon-after' : '',
     errorExistsAndFieldTouched ? 'error' : '',
-    // pickerOpen ? 'open' : '',
   ].join(' ')
 
   return (
     <div className={combinedClasses}>
       <Popover
-        className="eq-select-popover"
+        className="eq-datepicker-popover"
         position="bottom"
         align="start"
         // @ts-ignore
@@ -41,13 +40,11 @@ const FormWrappedDatePicker = ({
           <div>
             <Calendar
               color="var(--primaryColor)"
-              // className={pickerOpen ? 'open' : ''}
               date={new Date(formValue)}
               onChange={(newDate) => {
                 const newDateFormatted = new Date(newDate).toLocaleDateString()
                 form.setFieldValue(field.name, newDateFormatted)
-                // setValueSelected(true)
-                // setPickerOpen(false)
+                setPopoverOpen(false)
               }}
             />
           </div>
@@ -59,22 +56,12 @@ const FormWrappedDatePicker = ({
             {...field}
             {...rest}
             onChange={() => {}}
-            // onFocus={() => {
-            //   if (!valueSelected) setPickerOpen(true)
-            //   else setValueSelected(false)
-            // }}
-            // onClick={(e) => {
-            //   e.preventDefault()
-            //   setPickerOpen(true)
-            // }}
-            // onBlur={checkFocusOfInput}
             value={new Date(formValue).toISOString().split('T')[0]}
             id={field.name}
             placeholder=" "
             spellCheck={false}
             type="date"
           />
-          <span className="eq-input-icon">{iconAfter}</span>
           <span className="eq-input-icon">{iconAfter}</span>
           {!!label && <label>{label}</label>}
           {!!errorExistsAndFieldTouched && (
@@ -84,12 +71,6 @@ const FormWrappedDatePicker = ({
           )}
         </>
       </Popover>
-      {!!label && <label>{label}</label>}
-      {!!errorExistsAndFieldTouched && (
-        <div className="error-message">
-          <FiXCircle /> {error}
-        </div>
-      )}
     </div>
   )
 }
