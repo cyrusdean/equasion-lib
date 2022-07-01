@@ -36,6 +36,7 @@ const FormWrappedDatePicker = ({
         padding={1}
         isPopoverOpen={popoverOpen}
         setIsPopoverOpen={(open) => setPopoverOpen(open)}
+        arrowAttributes={{ arrowSize: 0 }}
         content={
           <div>
             <Calendar
