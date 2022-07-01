@@ -20,18 +20,18 @@
         brightness(95%) contrast(93%);
     }
   }
-  .rdrCalendarWrapper {
-    position: absolute;
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0.2s, opacity 0.2s ease-in;
+  // .rdrCalendarWrapper {
+  //   position: absolute;
+  //   visibility: hidden;
+  //   opacity: 0;
+  //   transition: visibility 0.2s, opacity 0.2s ease-in;
 
-    &.open {
-      opacity: 1;
-      visibility: visible;
-      transition: visibility 0.2s, opacity 0.2s ease-out;
-    }
-  }
+  //   &.open {
+  //     opacity: 1;
+  //     visibility: visible;
+  //     transition: visibility 0.2s, opacity 0.2s ease-out;
+  //   }
+  // }
   &.open ~ {
     .eq-select,
     .eq-input,
