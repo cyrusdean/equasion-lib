@@ -118,6 +118,8 @@ const Tabs = ({
     if (!dataPoint) {
       // Set a default of the first item in the data set
       setActiveKey(getDefaultKey(tabData))
+    } else {
+      setActiveContent(dataPoint.content)
     }
   }, [tabData])
 
