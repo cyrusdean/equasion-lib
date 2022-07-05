@@ -18,7 +18,6 @@ const mapKeyLabelContent = (
   label,
   content,
 })
-
 // Validation for tabs
 const validateTabsData = (data: any[]) => {
   return (
@@ -103,7 +102,6 @@ const Tabs = ({
 }: TabsProps) => {
   const [tabData, setTabData] = useState(normalizeData(data, menuOnly))
   const [activeKey, setActiveKey] = useState(selectedKey)
-  const [activeContent, setActiveContent] = useState(null)
 
   // Whenever the external data is changed
   useEffect(() => {
@@ -118,29 +116,25 @@ const Tabs = ({
     if (!dataPoint) {
       // Set a default of the first item in the data set
       setActiveKey(getDefaultKey(tabData))
-    } else {
-      setActiveContent(dataPoint.content)
     }
   }, [tabData])
 
   // Whenever the active key changes update the corresponding content
   useEffect(() => {
-    // gets the corresponding tab data for the key
-    const dataPoint = findDataByKey(tabData, activeKey)
-    setActiveContent(dataPoint ? dataPoint.content : null)
-
     // Sends a signal about the active key
     if (typeof onTabChange === 'function') {
       onTabChange(activeKey)
     }
   }, [activeKey])
 
-  // Allows parent componet to change active tab
-  // This will trigger [activeKey] useEffect
+  // Allows parent component to change active tab
+
   useEffect(() => {
     setActiveKey(selectedKey)
   }, [selectedKey])
 
+  // Selects the corresponding datapoint from the Tabs data for the active key
+  const dataPoint = findDataByKey(tabData, activeKey)
   return (
     <div
       className={`eq-tabs-container ${vertical ? 'vertical' : 'horizontal'} ${
@@ -164,7 +158,11 @@ const Tabs = ({
         </div>
       </div>
 
-      {!menuOnly && <div className="eq-tabs-content">{activeContent}</div>}
+      {!menuOnly && (
+        <div className="eq-tabs-content">
+          {dataPoint ? dataPoint.content : null}
+        </div>
+      )}
     </div>
   )
 }
