@@ -24,6 +24,11 @@ const FormWrappedInput = ({
     if (formValue !== value) setValue(formValue)
   }, [formValue])
 
+  const updateFieldValue = (val) => {
+    const nameIsArry = Array.isArray(fieldName)
+    form.setFieldValue(nameIsArry ? fieldName.join('.') : fieldName, val)
+  }
+
   return (
     <div className={`eq-input ${errorExistsAndFieldTouched ? 'error' : ''}`}>
       <span className="eq-input-icon">{iconBefore}</span>
@@ -32,9 +37,8 @@ const FormWrappedInput = ({
           {...field}
           onBlur={({ target }) => {
             if (manual) return
-            if (inputType === 'number')
-              form.setFieldValue(field.name, +target.value)
-            else form.setFieldValue(field.name, target.value)
+            if (inputType === 'number') updateFieldValue(+target.value)
+            else updateFieldValue(target.value)
           }}
           onInput={({ target }) => {
             if (inputType === 'number' && !!target.value)
@@ -45,9 +49,9 @@ const FormWrappedInput = ({
             if (keyCode === 13) {
               if (inputType === 'number')
                 // @ts-ignore
-                form.setFieldValue(field.name, +target.value)
+                updateFieldValue(+target.value)
               // @ts-ignore
-              else form.setFieldValue(field.name, target.value)
+              else updateFieldValue(target.value)
               form.submitForm()
             }
           }}
@@ -63,7 +67,7 @@ const FormWrappedInput = ({
           id={field.name}
           onBlur={({ target }) => {
             if (manual) return
-            form.setFieldValue(field.name, target.value)
+            updateFieldValue(target.value)
           }}
           onChange={({ target }) => {
             if (manual) return
