@@ -15,8 +15,10 @@ const FormWrappedInput = ({
   ...rest
 }) => {
   const fieldName = field.name
+  const nameIsArry = Array.isArray(fieldName)
+  const formattedFieldName = nameIsArry ? fieldName.join('.') : fieldName
   const error = get(form.errors, fieldName)
-  const [value, setValue] = useState(form.values[field.name])
+  const [value, setValue] = useState(form.values[fieldName])
   const errorExistsAndFieldTouched = !!error && !!get(form.touched, fieldName)
   const formValue = get(form.values, fieldName)
 
@@ -24,10 +26,7 @@ const FormWrappedInput = ({
     if (formValue !== value) setValue(formValue)
   }, [formValue])
 
-  const updateFieldValue = (val) => {
-    const nameIsArry = Array.isArray(fieldName)
-    form.setFieldValue(nameIsArry ? fieldName.join('.') : fieldName, val)
-  }
+  const updateFieldValue = (val) => form.setFieldValue(formattedFieldName, val)
 
   return (
     <div className={`eq-input ${errorExistsAndFieldTouched ? 'error' : ''}`}>
@@ -35,6 +34,7 @@ const FormWrappedInput = ({
       {['input', 'number', 'password'].includes(inputType) ? (
         <input
           {...field}
+          name={formattedFieldName}
           onBlur={({ target }) => {
             if (manual) return
             if (inputType === 'number') updateFieldValue(+target.value)
@@ -57,14 +57,14 @@ const FormWrappedInput = ({
           }}
           value={value}
           type={inputType}
-          id={field.name}
+          id={fieldName}
           {...rest}
           placeholder=" "
         />
       ) : (
         <textarea
           {...field}
-          id={field.name}
+          id={fieldName}
           onBlur={({ target }) => {
             if (manual) return
             updateFieldValue(target.value)
