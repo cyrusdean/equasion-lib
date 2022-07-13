@@ -5,14 +5,19 @@ import get from 'lodash.get'
 
 const FormWrappedCheckbox = ({ field, form, label, ...rest }) => {
   const fieldName = field.name
+  const nameIsArry = Array.isArray(fieldName)
+  const formattedFieldName = nameIsArry ? fieldName.join('.') : fieldName
   const error = get(form.errors, fieldName)
+  const formValue = get(form.values, fieldName)
   const errorExistsAndFieldTouched = !!error && !!get(form.touched, fieldName)
-  const checked = rest.checked || form.values[field.name]
+  const checked = rest.checked || formValue
+
+  const updateFieldValue = (val) => form.setFieldValue(formattedFieldName, val)
 
   return (
     <div
       className={`eq-checkbox ${error ? 'error' : ''}`}
-      onClick={() => form.setFieldValue(field.name, !checked)}
+      onClick={() => updateFieldValue(!checked)}
     >
       <input
         {...field}

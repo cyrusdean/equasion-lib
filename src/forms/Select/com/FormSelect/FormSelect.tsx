@@ -21,13 +21,15 @@ const FormWrappedSelect = ({
     {}
   )
   const fieldName = field.name
+  const nameIsArry = Array.isArray(fieldName)
+  const formattedFieldName = nameIsArry ? fieldName.join('.') : fieldName
+  const formValue = get(form.values, fieldName)
   const error = get(form.errors, fieldName)
   const [popoverOpen, setPopoverOpen] = useState(false)
   const [filterValue, setFilterValue] = useState(
-    multi ? '' : optionsObj[form.values[fieldName]] || ''
+    multi ? '' : optionsObj[formValue] || ''
   )
   const errorExistsAndFieldTouched = !!error && !!get(form.touched, fieldName)
-  const formValue = get(form.values, fieldName)
 
   const calcedOptions = options.filter(
     ([value, display]) =>
@@ -45,6 +47,8 @@ const FormWrappedSelect = ({
     iconAfter ? 'icon-after' : '',
     errorExistsAndFieldTouched ? 'error' : '',
   ].join(' ')
+
+  const updateFieldValue = (val) => form.setFieldValue(formattedFieldName, val)
 
   return (
     <div className={combinedClasses}>
@@ -69,10 +73,7 @@ const FormWrappedSelect = ({
                     onMouseDown={() => {
                       if (!multi) setFilterValue(display)
                       else setFilterValue('')
-                      form.setFieldValue(
-                        fieldName,
-                        multi ? [...formValue, val] : val
-                      )
+                      updateFieldValue(multi ? [...formValue, val] : val)
                       setPopoverOpen(false)
                     }}
                   >
@@ -85,7 +86,7 @@ const FormWrappedSelect = ({
                   onMouseDown={() => {
                     if (!multi) {
                       setFilterValue('')
-                      form.setFieldValue(fieldName, '')
+                      updateFieldValue('')
                       setPopoverOpen(false)
                     }
                   }}
@@ -111,10 +112,10 @@ const FormWrappedSelect = ({
                         filterValue.toLowerCase()
                     )
                   )
-                    form.setFieldValue(fieldName, '')
+                    updateFieldValue('')
                   else if (formValue && !!filterValue)
                     setFilterValue(optionsObj[formValue])
-                  else if (!filterValue) form.setFieldValue(fieldName, '')
+                  else if (!filterValue) updateFieldValue('')
                 }
                 setPopoverOpen(false)
               }}
@@ -123,7 +124,7 @@ const FormWrappedSelect = ({
                 setFilterValue('')
               }}
               value={filterValue}
-              id={fieldName}
+              id={formattedFieldName}
               placeholder=" "
               autoComplete="off"
             />
@@ -143,8 +144,7 @@ const FormWrappedSelect = ({
             {optionsObj[selectedOptionValue]}{' '}
             <IoClose
               onClick={() =>
-                form.setFieldValue(
-                  fieldName,
+                updateFieldValue(
                   formValue.filter((val) => val != selectedOptionValue)
                 )
               }

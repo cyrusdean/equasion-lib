@@ -15,6 +15,8 @@ const FormWrappedDatePicker = ({
 }) => {
   const [popoverOpen, setPopoverOpen] = useState(false)
   const fieldName = field.name
+  const nameIsArry = Array.isArray(fieldName)
+  const formattedFieldName = nameIsArry ? fieldName.join('.') : fieldName
   const error = get(form.errors, fieldName)
   const errorExistsAndFieldTouched = !!error && !!get(form.touched, fieldName)
   const formValue = get(form.values, fieldName)
@@ -25,6 +27,8 @@ const FormWrappedDatePicker = ({
     iconAfter ? 'icon-after' : '',
     errorExistsAndFieldTouched ? 'error' : '',
   ].join(' ')
+
+  const updateFieldValue = (val) => form.setFieldValue(formattedFieldName, val)
 
   return (
     <div className={combinedClasses}>
@@ -43,7 +47,7 @@ const FormWrappedDatePicker = ({
               date={new Date(formValue)}
               onChange={(newDate) => {
                 const newDateFormatted = new Date(newDate).toLocaleDateString()
-                form.setFieldValue(field.name, newDateFormatted)
+                updateFieldValue(newDateFormatted)
                 setPopoverOpen(false)
               }}
             />
@@ -57,7 +61,7 @@ const FormWrappedDatePicker = ({
             {...rest}
             onChange={() => {}}
             value={new Date(formValue).toISOString().split('T')[0]}
-            id={field.name}
+            id={formattedFieldName}
             placeholder=" "
             spellCheck={false}
             type="date"

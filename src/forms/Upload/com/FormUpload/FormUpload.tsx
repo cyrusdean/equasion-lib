@@ -17,6 +17,8 @@ const FormWrappedUpload = ({
 }) => {
   const fileInputRef = useRef(null)
   const fieldName = field.name
+  const nameIsArry = Array.isArray(fieldName)
+  const formattedFieldName = nameIsArry ? fieldName.join('.') : fieldName
   const error = get(form.errors, fieldName)
   const errorExistsAndFieldTouched = !!error && !!get(form.touched, fieldName)
   const fileList = get(form.values, fieldName)
@@ -24,7 +26,6 @@ const FormWrappedUpload = ({
     fileInputRef.current.focus()
     fileInputRef.current.click()
   }
-  console.log(form.values)
 
   const combinedClasses = [
     'eq-upload',
@@ -32,6 +33,8 @@ const FormWrappedUpload = ({
     fileList.length ? 'has-files' : '',
     type,
   ].join(' ')
+
+  const updateFieldValue = (val) => form.setFieldValue(formattedFieldName, val)
 
   return (
     <div className={combinedClasses}>
@@ -46,17 +49,14 @@ const FormWrappedUpload = ({
             console.log(firstFile)
             if (!fileList.some(({ size }) => size > 12000000)) {
               multiple
-                ? form.setFieldValue(field.name, fileList)
-                : form.setFieldValue(
-                    field.name,
-                    fileList.length ? [firstFile] : []
-                  )
+                ? updateFieldValue(fileList)
+                : updateFieldValue(fileList.length ? [firstFile] : [])
             } else {
-              form.setErrors({ [field.name]: '12 MB size limit' })
+              form.setErrors({ [formattedFieldName]: '12 MB size limit' })
             }
             e.target.value = ''
           }}
-          id={field.name}
+          id={formattedFieldName}
           type="file"
           multiple={multiple}
           title=" "
@@ -86,8 +86,7 @@ const FormWrappedUpload = ({
                   className="delete-file"
                   onClick={(e) => {
                     e.stopPropagation()
-                    form.setFieldValue(
-                      field.name,
+                    updateFieldValue(
                       fileList.filter((file) => file.name !== name)
                     )
                   }}

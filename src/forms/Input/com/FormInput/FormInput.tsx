@@ -18,9 +18,9 @@ const FormWrappedInput = ({
   const nameIsArry = Array.isArray(fieldName)
   const formattedFieldName = nameIsArry ? fieldName.join('.') : fieldName
   const error = get(form.errors, fieldName)
-  const [value, setValue] = useState(form.values[fieldName])
-  const errorExistsAndFieldTouched = !!error && !!get(form.touched, fieldName)
   const formValue = get(form.values, fieldName)
+  const [value, setValue] = useState(formValue)
+  const errorExistsAndFieldTouched = !!error && !!get(form.touched, fieldName)
 
   useEffect(() => {
     if (formValue !== value) setValue(formValue)
@@ -57,14 +57,14 @@ const FormWrappedInput = ({
           }}
           value={value}
           type={inputType}
-          id={fieldName}
+          id={formattedFieldName}
           {...rest}
           placeholder=" "
         />
       ) : (
         <textarea
           {...field}
-          id={fieldName}
+          id={formattedFieldName}
           onBlur={({ target }) => {
             if (manual) return
             updateFieldValue(target.value)
