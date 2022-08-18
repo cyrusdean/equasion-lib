@@ -16,7 +16,7 @@ export default {
       globals: { 'styled-components': 'styled' },
     },
   ],
-  plugins: [sass({ insert: true }), typescript(), peerDepsExternal()],
+  plugins: [sass({ output: true }), typescript(), peerDepsExternal()],
   external: [
     'react',
     'react-dom',
