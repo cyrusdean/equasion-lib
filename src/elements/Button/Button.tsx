@@ -45,7 +45,11 @@ const AppButton = ({
     className,
     `eq-type-${type}`,
     `eq-size-${size}`,
-  ].join(' ')
+    IconBefore ? 'icon-before' : undefined,
+    IconAfter ? 'icon-after' : undefined,
+  ]
+    .filter(Boolean)
+    .join(' ')
   return (
     <button
       className={combinedClasslassName}
