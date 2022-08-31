@@ -1,14 +1,47 @@
 .eq-key-vals {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-
-  .eq-key-val {
-    width: 50%;
-    margin-bottom: 10px;
-
-    .eq-key {
-      font-weight: bold;
+  flex-direction: column;
+  &.eq-size {
+    &-default {
+      .eq-key-val {
+        padding: 7px 0;
+        .eq-key {
+        }
+      }
+    }
+    &-compact {
+      font-size: 1.4rem;
+      .eq-key-val {
+        margin-bottom: 0;
+      }
+    }
+  }
+  &.eq-type {
+    &-default {
+      .eq-key-val {
+        .eq-key {
+          font-weight: 600;
+        }
+      }
+    }
+    &-minimal {
+      .eq-key-val {
+        .eq-key {
+          font-weight: normal;
+        }
+      }
+    }
+    &-line {
+      .eq-key-val {
+        border-bottom: 1px solid var(--n75);
+        &:last-child {
+          border-bottom: none;
+        }
+        .eq-key {
+          font-weight: 600;
+        }
+      }
     }
   }
 }

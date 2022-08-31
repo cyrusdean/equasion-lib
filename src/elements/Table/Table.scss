@@ -15,3 +15,53 @@
     border-bottom: 7px solid var(--n700);
   }
 }
+
+nav.rdt_Pagination {
+  background-color: transparent;
+  border: none;
+}
+.rdt_Table {
+  background-color: transparent;
+  .rdt_TableHead {
+    position: relative;
+    z-index: 1;
+
+    border-radius: 4px 4px 0 0;
+    background-color: #fcfcfc;
+    border: 1px solid var(--n50);
+    box-sizing: border-box;
+    padding-top: 4px;
+
+    .rdt_TableHeadRow {
+      background-color: #fcfcfc;
+      border: none;
+
+      .rdt_TableCol,
+      .rdt_TableCol_Sortable,
+      .iMorMe {
+        opacity: 1;
+        font-weight: bold;
+        color: var(--n900);
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .rdt_TableBody {
+    background-color: var(--n0);
+    border: 1px solid var(--n50);
+    border-width: 0 1px 1px 1px;
+    border-radius: 0 0 4px 4px;
+    padding-bottom: 4px;
+
+    .rdt_TableRow {
+      color: var(--n900);
+      font-size: 1.4rem;
+      line-height: 2.2rem;
+    }
+  }
+}

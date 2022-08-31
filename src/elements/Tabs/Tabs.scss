@@ -9,7 +9,7 @@
       padding: 5px;
       border-radius: 10px;
       gap: 5px;
-      background-color: inherit;
+      background-color: var(--n0);
       display: flex;
       border: 1px solid var(--n75);
       height: fit-content;
@@ -19,14 +19,13 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 26px;
         border-radius: 6px;
-        padding: 8px 15px;
+        padding: 10px 15px;
         // text styles
         color: var(--n900, #000);
         margin: 0px;
         line-height: 20px;
-        font-size: 14px;
+        font-size: 1.4rem;
         min-width: fit-content;
         // All items cursor turns to pointer on hover
         &:not(.disabled) {
@@ -36,6 +35,10 @@
         &:not(.disabled):not(.active):hover {
           background-color: var(--primary100);
           color: var(--primary500);
+          &:active {
+            background-color: var(--primary600);
+            color: var(--n0, #fff);
+          }
         }
         // Applies to the actively selected item
         &.active {
@@ -64,10 +67,9 @@
   &.horizontal {
     flex-direction: column;
     > .eq-tabs-menu-container {
-      height: 80px;
       align-items: center;
       width: 100%;
-      margin-bottom: 8px;
+      margin-bottom: 2.4rem;
       .eq-tabs-menu {
         flex-direction: row;
         width: fit-content;
@@ -75,6 +77,43 @@
         // Each tab has 10px margin on the right except for the last one
         .eq-tab-item {
           padding: 8px 15px;
+        }
+      }
+    }
+  }
+  &.minimal {
+    border-radius: 0;
+    .eq-tabs-menu-container {
+      background-color: transparent;
+      border-bottom: 1px solid var(--n75);
+      .eq-tabs-menu {
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        gap: 0;
+        .eq-tab-item {
+          border-radius: 0;
+          border-bottom: 3px solid transparent;
+          margin: 0;
+          &:hover {
+            background-color: transparent;
+          }
+          &.active {
+            background-color: transparent;
+            color: var(--primaryColor);
+            font-weight: 600;
+            border-bottom: 3px solid var(--primaryColor);
+            border-radius: 0;
+          }
+          &:not(.disabled):not(.active):hover {
+            background-color: var(--n25);
+            color: inherit;
+            &:active {
+              background-color: transparent;
+              color: var(--primaryColor);
+            }
+          }
         }
       }
     }
@@ -88,7 +127,7 @@
     }
     > .eq-tabs-menu-container {
       height: 100%;
-      margin-right: 18px;
+      margin-right: 2.4rem;
       max-width: 25%;
       min-width: fit-content;
       overflow-x: scroll;
@@ -100,6 +139,33 @@
           padding-left: 15px;
           padding-right: 15px;
           margin: 0px;
+        }
+      }
+    }
+    &.minimal {
+      .eq-tabs-menu-container {
+        .eq-tabs-menu {
+          .eq-tab-item {
+            border-right: 3px solid var(--n75);
+            border-bottom: none;
+            &.active {
+              border-bottom: none;
+              border-right: 3px solid var(--primaryColor);
+              font-weight: inherit;
+            }
+            &:not(.disabled):not(.active):hover {
+              color: inherit;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.compact {
+    .eq-tabs-menu-container {
+      .eq-tabs-menu {
+        .eq-tab-item {
+          padding: 4px 10px;
         }
       }
     }

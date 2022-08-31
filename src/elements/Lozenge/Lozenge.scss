@@ -1,15 +1,14 @@
 .eq-lozenge {
-  min-width: 50px;
-  min-height: 16px;
-  padding: 4px;
+  min-width: 20px;
+  min-height: 20px;
+  padding: 1px 6px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 3px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.6rem;
-  font-weight: 600;
-  text-transform: uppercase;
+  font-weight: 400;
   // | 'default'
   // | 'primary'
   // | 'secondary'
@@ -19,12 +18,16 @@
   // | 'red'
   // | 'purple'
   // | 'blue'
+  &.eq-brightness-light {
+    padding: 0px 5px;
+  }
   &.eq-type {
     &-default {
       &.eq-brightness {
         &-light {
           color: var(--n400);
           background-color: var(--n50);
+          border: 1px solid var(--n400);
         }
         &-dark {
           color: var(--n25);
@@ -36,6 +39,7 @@
       &.eq-brightness {
         &-light {
           color: var(--primaryColor);
+          border: 1px solid var(--primaryColor);
           background-color: var(--primary100);
         }
         &-dark {
@@ -48,6 +52,7 @@
       &.eq-brightness {
         &-light {
           color: var(--secondary500);
+          border: 1px solid var(--secondary500);
           background-color: var(--secondary100);
         }
         &-dark {
@@ -60,6 +65,7 @@
       &.eq-brightness {
         &-light {
           color: var(--green);
+          border: 1px solid var(--green);
           background-color: var(--g100);
         }
         &-dark {
@@ -72,6 +78,7 @@
       &.eq-brightness {
         &-light {
           color: var(--y600);
+          border: 1px solid var(--y600);
           background-color: var(--y100);
         }
         &-dark {
@@ -83,12 +90,13 @@
     &-orange {
       &.eq-brightness {
         &-light {
-          color: var(--o100);
-          background-color: var(--o500);
+          color: var(--o500);
+          border: 1px solid var(--o500);
+          background-color: var(--o100);
         }
         &-dark {
-          color: var(--o500);
-          background-color: var(--o100);
+          color: var(--o100);
+          background-color: var(--o500);
         }
       }
     }
@@ -96,6 +104,7 @@
       &.eq-brightness {
         &-light {
           color: var(--red);
+          border: 1px solid var(--red);
           background-color: var(--r100);
         }
         &-dark {
@@ -108,6 +117,7 @@
       &.eq-brightness {
         &-light {
           color: var(--purple);
+          border: 1px solid var(--purple);
           background-color: var(--p100);
         }
         &-dark {
@@ -120,6 +130,7 @@
       &.eq-brightness {
         &-light {
           color: var(--blue);
+          border: 1px solid var(--blue);
           background-color: var(--b100);
         }
         &-dark {

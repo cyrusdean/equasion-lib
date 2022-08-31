@@ -1,10 +1,11 @@
 import React from 'react'
 import './Alert.scss'
 
-type AlertType = 'error'
+type AlertType = 'default' | 'danger' | 'success' | 'warning'
 
 interface AlertProps {
   className: string
+  header: string
   message: string
   style: object
   type: AlertType
@@ -12,15 +13,21 @@ interface AlertProps {
 }
 
 const Alert = ({
+  header = '',
   message = '',
-  type = 'error',
+  type = 'default',
   // showIcon = true,
   className = '',
 }: AlertProps) => {
   const combinedClassName = ['eq-alert', `eq-alert-${type}`, className].join(
     ' '
   )
-  return <div className={combinedClassName}>{message}</div>
+  return (
+    <div className={combinedClassName}>
+      <span>{header}</span>
+      {message}
+    </div>
+  )
 }
 
 export default Alert

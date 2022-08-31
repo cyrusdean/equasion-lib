@@ -8,7 +8,13 @@ const Spinner = () => (
     <div>
       {
         // @ts-ignore
-        <FadeLoader color="rgb(10, 73, 117)" />
+        <FadeLoader
+          color="#000000"
+          height="10"
+          width="4"
+          margin="0"
+          radius="4"
+        />
       }
     </div>
   </div>
