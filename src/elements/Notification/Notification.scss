@@ -20,6 +20,13 @@
   line-height: 15px;
   right: 0;
   font-weight: 300;
+  border-radius: 20px !important;
   font-family: inherit;
-  padding: 0.3em 0.6em 0.4em !important;
+  padding: 4px !important;
+  width: 24px;
+  height: 24px;
+  &:hover {
+    background-image: none !important;
+    background-color: var(--n25) !important;
+  }
 }
