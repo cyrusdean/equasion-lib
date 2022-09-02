@@ -51,11 +51,13 @@
       box-shadow: none;
 
       &:hover {
-        background-color: var(--n50);
+        background-color: var(--primary100);
+        color: var(--primary500);
       }
       &:active {
         background-color: var(--primary100);
         color: var(--primary600);
+        box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.04);
       }
       &:disabled {
         color: var(--n400);

@@ -4,11 +4,13 @@
 
 .swal2-title {
   margin: 0.5em 1em 0 !important;
+  color: var(--n900) !important;
+}
+.swal2-popup.swal2-toast .swal2-html-container {
+  margin-top: 5px !important;
 }
 
 .swal2-timer-progress-bar {
-  // height: 2px !important;
-  // background: var(--primaryColor) !important;
   background: rgba(0, 0, 0, 0.1) !important;
 }
 
