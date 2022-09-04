@@ -61,40 +61,45 @@ const FormWrappedUpload = ({
           multiple={multiple}
           title=" "
         />
-        {type === 'default' && (
-          // @ts-ignore
-          <Button size="compact" onClick={openFilePick}>
+        {['default', 'button'].includes(type) && (
+          <Button
+            size={type === 'button' ? 'default' : 'compact'}
+            // @ts-ignore
+            onClick={openFilePick}
+          >
             {buttonText}
           </Button>
         )}
         {!!label && <label>{label}</label>}
 
-        <div className="upload-file-list">
-          {fileList.map(({ name, type }) => {
-            const isImageType = ['svg', 'png', 'jpg', 'jpeg', 'ico'].some(
-              (imgType) => type.includes(imgType)
-            )
-            const isPDFType = type.includes('pdf')
-            return (
-              <div key={name} className="upload-file">
-                {!!isImageType && <BsFileImage />}
-                {!!isPDFType && <BsFilePdf />}
-                {!isImageType && !isPDFType && <BsFileText />}
-                {name}
+        {['default', 'dropzone'].includes(type) && (
+          <div className="upload-file-list">
+            {fileList.map(({ name, type }) => {
+              const isImageType = ['svg', 'png', 'jpg', 'jpeg', 'ico'].some(
+                (imgType) => type.includes(imgType)
+              )
+              const isPDFType = type.includes('pdf')
+              return (
+                <div key={name} className="upload-file">
+                  {!!isImageType && <BsFileImage />}
+                  {!!isPDFType && <BsFilePdf />}
+                  {!isImageType && !isPDFType && <BsFileText />}
+                  {name}
 
-                <MdDeleteOutline
-                  className="delete-file"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    updateFieldValue(
-                      fileList.filter((file) => file.name !== name)
-                    )
-                  }}
-                />
-              </div>
-            )
-          })}
-        </div>
+                  <MdDeleteOutline
+                    className="delete-file"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      updateFieldValue(
+                        fileList.filter((file) => file.name !== name)
+                      )
+                    }}
+                  />
+                </div>
+              )
+            })}
+          </div>
+        )}
         {!!errorExistsAndFieldTouched && (
           <div className="error-message">
             <FiXCircle />
