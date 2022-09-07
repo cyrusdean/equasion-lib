@@ -39,6 +39,8 @@ const TableFilter = ({
 
     if (filterValues.length) {
       updateFilterState(filterId, { active: true, value: filterValues })
+    } else {
+      resetSearch()
     }
   }
 

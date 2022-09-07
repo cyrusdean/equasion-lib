@@ -2,7 +2,7 @@ import * as React from 'react'
 import { FormUpload, AppUpload } from './com'
 import './Upload.scss'
 
-type UploadType = 'default' | 'dropzone'
+type UploadType = 'default' | 'dropzone' | 'button'
 
 interface UploadProps {
   form: boolean

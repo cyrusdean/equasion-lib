@@ -23,12 +23,6 @@
         }
       }
     }
-    .eq-button {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
   }
   .upload-file-list {
     position: absolute;
@@ -73,6 +67,14 @@
       transition: all 0.2s linear;
     }
   }
+  &.default {
+    .eq-button {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
   &.dropzone {
     .eq-upload-wrap {
       input {
@@ -100,6 +102,15 @@
     }
     .upload-file-list {
       top: 50%;
+    }
+  }
+  &.button {
+    input {
+      display: none;
+    }
+    .eq-upload-wrap .eq-button {
+      position: static;
+      margin-left: 0;
     }
   }
 }

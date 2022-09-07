@@ -15,7 +15,7 @@ const AppRadio = ({ options, label, onChange, defaultValue = '', ...rest }) => {
 
   return (
     <div className="eq-radio">
-      <label>{label}</label>
+      {!!label && <label>{label}</label>}
       {options.map(([val, display]) => (
         <div
           className="eq-radio-option"
@@ -28,7 +28,9 @@ const AppRadio = ({ options, label, onChange, defaultValue = '', ...rest }) => {
             onChange={() => {}}
             {...rest}
           />
-          <div className="radio-button" />
+          <div
+            className={`radio-button ${currentValue === val ? 'checked' : ''}`}
+          />
           {display}
         </div>
       ))}

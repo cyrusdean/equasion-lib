@@ -15,7 +15,7 @@ const FormWrappedRadio = ({ field, form, options, label, ...rest }) => {
 
   return (
     <div className={`eq-radio ${errorExistsAndFieldTouched ? 'error' : ''}`}>
-      <label>{label}</label>
+      {!!label && <label>{label}</label>}
       {options.map(([val, display]) => (
         <div
           className="eq-radio-option"
