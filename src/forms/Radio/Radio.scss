@@ -14,6 +14,7 @@
     input[type='radio'] {
       display: none;
 
+      & + .radio-button.checked,
       &:checked + .radio-button {
         background-color: var(--b600);
 
@@ -34,6 +35,7 @@
         background-color: var(--n25);
         border: 1px solid var(--n25);
       }
+      &:focus + .radio-button.checked,
       &:checked:focus + .radio-button {
         background-color: var(--b600);
         border: 1px solid var(--b100);
@@ -43,6 +45,7 @@
           background-color: var(--n0);
         }
       }
+      &:disabled + .radio-button.checked,
       &:checked:disabled + .radio-button {
         background-color: var(--n25);
         border: none;
@@ -84,6 +87,7 @@
           & + .radio-button {
             background-color: var(--n50);
           }
+          & + .radio-button.checked,
           &:checked + .radio-button {
             background-color: var(--b500);
           }

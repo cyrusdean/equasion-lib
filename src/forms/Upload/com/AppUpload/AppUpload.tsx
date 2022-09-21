@@ -53,38 +53,40 @@ const AppUpload = ({
           multiple={multiple}
           title=" "
         />
-        {type === 'default' && (
+        {['default', 'button'].includes(type) && (
           // @ts-ignore
           <Button size="compact" onClick={openFilePick}>
             {buttonText}
           </Button>
         )}
         {!!label && <label>{label}</label>}
-        <div className="upload-file-list">
-          {currentValue.map(({ name, type }) => {
-            const isImageType = ['svg', 'png', 'jpg', 'jpeg', 'ico'].some(
-              (imgType) => type.includes(imgType)
-            )
-            const isPDFType = type.includes('pdf')
-            return (
-              <div key={name} className="upload-file">
-                {!!isImageType && <BsFileImage />}
-                {!!isPDFType && <BsFilePdf />}
-                {!isImageType && !isPDFType && <BsFileText />}
-                {name}
+        {['default', 'dropzone'].includes(type) && (
+          <div className="upload-file-list">
+            {currentValue.map(({ name, type }) => {
+              const isImageType = ['svg', 'png', 'jpg', 'jpeg', 'ico'].some(
+                (imgType) => type.includes(imgType)
+              )
+              const isPDFType = type.includes('pdf')
+              return (
+                <div key={name} className="upload-file">
+                  {!!isImageType && <BsFileImage />}
+                  {!!isPDFType && <BsFilePdf />}
+                  {!isImageType && !isPDFType && <BsFileText />}
+                  {name}
 
-                <MdDeleteOutline
-                  className="delete-file"
-                  onClick={() =>
-                    updateValue(
-                      currentValue.filter((file) => file.name !== name)
-                    )
-                  }
-                />
-              </div>
-            )
-          })}
-        </div>
+                  <MdDeleteOutline
+                    className="delete-file"
+                    onClick={() =>
+                      updateValue(
+                        currentValue.filter((file) => file.name !== name)
+                      )
+                    }
+                  />
+                </div>
+              )
+            })}
+          </div>
+        )}
       </div>
     </div>
   )
