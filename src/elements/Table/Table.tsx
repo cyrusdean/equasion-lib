@@ -9,6 +9,11 @@ interface IEqTableProps {
   dataName?: string
 }
 const customStyles = {
+  table: {
+    style: {
+      backgroundColor: 'transparent',
+    },
+  },
   rows: {
     style: {
       minHeight: '48px',

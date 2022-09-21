@@ -98,7 +98,7 @@
   &.icon-before {
     input,
     textarea {
-      padding-left: 35px;
+      padding-left: 38px;
 
       &:not(:placeholder-shown),
       &:-webkit-autofill,
@@ -108,11 +108,10 @@
           left: 26px;
         }
       }
-      &:hover,
       &:-webkit-autofill,
       &:focus,
       &:focus-visible {
-        padding-left: 34px;
+        padding-left: 37px;
       }
     }
     label {

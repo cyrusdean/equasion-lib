@@ -91,7 +91,7 @@ const FormWrappedSelect = ({
                     }
                   }}
                 >
-                  - No Options Found -
+                  No options found
                 </div>
               )}
             </div>

@@ -38,6 +38,7 @@ const AppDatePicker = ({
           <div>
             <Calendar
               color="var(--primaryColor)"
+              className="foobar"
               date={new Date(currentValue)}
               onChange={(newDate) => {
                 const newDateFormatted = new Date(newDate).toLocaleDateString()
