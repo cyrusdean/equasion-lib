@@ -102,7 +102,10 @@ const FormWrappedSelect = ({
             <input
               {...field}
               {...rest}
-              onChange={({ target }) => setFilterValue(target.value)}
+              onChange={({ target }) => {
+                setFilterValue(target.value)
+                if (!popoverOpen) setPopoverOpen(true)
+              }}
               onBlur={() => {
                 if (!multi) {
                   if (
@@ -120,8 +123,8 @@ const FormWrappedSelect = ({
                 setPopoverOpen(false)
               }}
               onFocus={() => {
-                // setPopoverOpen(false)
                 setFilterValue('')
+                if (!popoverOpen) setPopoverOpen(true)
               }}
               value={filterValue}
               id={formattedFieldName}

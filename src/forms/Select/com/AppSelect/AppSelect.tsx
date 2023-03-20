@@ -104,7 +104,10 @@ const AppSelect = ({
             <span className="eq-input-icon">{iconBefore}</span>
             <input
               {...rest}
-              onChange={({ target }) => setFilterValue(target.value)}
+              onChange={({ target }) => {
+                setFilterValue(target.value)
+                if (!popoverOpen) setPopoverOpen(true)
+              }}
               onBlur={() => {
                 if (!multi) {
                   if (
@@ -121,7 +124,7 @@ const AppSelect = ({
               }}
               onFocus={() => {
                 setFilterValue('')
-                // setPopoverOpen(true)
+                if (!popoverOpen) setPopoverOpen(true)
               }}
               value={filterValue}
               placeholder=" "
