@@ -1,5 +1,25 @@
 @import '../../shared/styles/input-styles.scss';
 
+.eq-datepicker-popover {
+  .popover-arrow-container {
+    width: auto;
+  }
+  .rdrCalendarWrapper {
+    color: var(--n900);
+    font-size: 1.4rem;
+    width: 100%;
+    .rdrMonth {
+      width: auto;
+    }
+    .rdrDay.rdrDayHovered {
+      .rdrDayNumber {
+        &:after {
+          border: 2px solid;
+        }
+      }
+    }
+  }
+}
 .eq-datepicker {
   z-index: 1;
 
@@ -9,7 +29,6 @@
   input {
     text-decoration: transparent;
     cursor: pointer;
-
     &::-webkit-datetime-edit-day-field:focus,
     &::-webkit-datetime-edit-month-field:focus,
     &::-webkit-datetime-edit-year-field:focus {
@@ -23,10 +42,4 @@
         brightness(95%) contrast(93%);
     }
   }
-}
-
-.eq-datepicker-popover.eq-popover-container .popover-arrow-container {
-  box-shadow: none;
-  // Looks like this important is absolutely necessary to override
-  padding: 0 !important;
 }

@@ -98,6 +98,8 @@ const Tabs = ({
   disabledKeys = [],
   menuOnly = false,
   vertical = false,
+  compact = false,
+  minimal = false,
   onTabChange,
 }: TabsProps) => {
   const [tabData, setTabData] = useState(normalizeData(data, menuOnly))
@@ -135,11 +137,12 @@ const Tabs = ({
 
   // Selects the corresponding datapoint from the Tabs data for the active key
   const dataPoint = findDataByKey(tabData, activeKey)
+
   return (
     <div
       className={`eq-tabs-container ${vertical ? 'vertical' : 'horizontal'} ${
-        menuOnly ? 'menu-only' : ''
-      }`}
+        compact ? 'compact' : ''
+      } ${minimal ? 'minimal' : ''} ${menuOnly ? 'menu-only' : ''}`}
     >
       <div className="eq-tabs-menu-container">
         <div className="eq-tabs-menu">

@@ -48,7 +48,7 @@ const Popover = ({
             arrowClassName={`popover-arrow ${arrowPosition}`}
             {...(hasArrow && {
               arrowColor: 'var(--n0)',
-              arrowSize: 9,
+              arrowSize: 10,
             })}
             {...arrowAttributes}
           >

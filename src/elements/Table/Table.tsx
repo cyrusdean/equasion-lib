@@ -3,9 +3,47 @@ import Table from 'react-data-table-component'
 import type { IDataTableProps } from 'react-data-table-component'
 import ToolBar from './com/ToolBar'
 import useRecordManager, { defaultSort, getValueFromPath } from './Table.utils'
+import './Table.scss'
 
 interface IEqTableProps {
   dataName?: string
+}
+const customStyles = {
+  table: {
+    style: {
+      backgroundColor: 'transparent',
+    },
+  },
+  rows: {
+    style: {
+      minHeight: '48px',
+      '&:not(:last-of-type)': {
+        borderBottomStyle: 'solid',
+        borderBottomWidth: '1px',
+        borderBottomColor: '#ffffff',
+      },
+    },
+    denseStyle: {},
+    highlightOnHoverStyle: {
+      backgroundColor: '#f7f7f7',
+      outlineWidth: '0px',
+    },
+  },
+  headRow: {
+    style: { minHeight: '35px' },
+  },
+  headCells: {
+    style: {
+      paddingLeft: '16px', // override the cell padding for head cells
+      paddingRight: '16px',
+    },
+  },
+  cells: {
+    style: {
+      paddingLeft: '16px', // override the cell padding for data cells
+      paddingRight: '16px',
+    },
+  },
 }
 
 const DefaultTable = ({
@@ -80,11 +118,12 @@ IEqTableProps & IDataTableProps) => {
       columns={columns}
       pointerOnHover={!!onRowClicked || !!expandableRows}
       noDataComponent={`There are no ${dataName}.`}
-      dense
       persistTableHead
       onRowClicked={onRowClicked}
       expandableRows={expandableRows}
       pagination
+      highlightOnHover
+      customStyles={customStyles}
       {...rest}
     />
   )

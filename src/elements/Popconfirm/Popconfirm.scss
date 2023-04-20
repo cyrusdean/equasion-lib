@@ -7,9 +7,8 @@
       color: var(--n900);
       font-size: 16px;
       line-height: 22px;
-      font-weight: 700;
+      font-weight: 600;
       margin: 0px;
-      margin-bottom: 10px;
     }
     &-description {
       font-weight: 400;
@@ -20,7 +19,7 @@
   .eq-popconfirm-buttons {
     display: flex;
     justify-content: flex-start;
-    margin-top: 10px;
+    margin-top: 15px;
     button {
       margin: 0px;
       &:first-of-type {

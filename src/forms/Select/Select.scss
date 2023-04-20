@@ -31,7 +31,8 @@
     display: inline-flex;
     margin-right: 5px;
     margin-top: 5px;
-    padding: 3px;
+    padding: 0 0 0 5px;
+    font-size: 1.4rem;
     border: 1px solid var(--primaryColor);
     color: var(--primaryColor);
     align-items: center;
@@ -43,6 +44,15 @@
       cursor: pointer;
       color: var(--n300);
       opacity: 1;
+      color: var(--primaryColor);
+      opacity: 0.5;
+      font-size: 1.6rem;
+      padding: 5px;
+      margin-left: -3px;
+      &:hover {
+        color: var(--primary600);
+        opacity: 1;
+      }
     }
   }
 }

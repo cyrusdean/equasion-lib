@@ -5,12 +5,10 @@
 .eq-upload {
   position: relative;
   margin: 20px 0;
-
   .eq-input-icon {
     > svg {
       position: absolute;
       top: 50%;
-
       color: var(--n200);
       opacity: 1;
       transform: translateY(-50%);
@@ -27,32 +25,30 @@
   textarea {
     display: block;
     border: 1px solid var(--borderColor);
-    border-radius: 8px;
+    border-radius: var(--input-border-radius);
     width: 100%;
-    height: 52px;
-
-    padding: 10px;
-    padding-top: 20px;
-    font-size: 1.5rem;
-    transition: all 0.2s linear;
+    height: 55px;
+    padding: 30px 15px 15px;
+    font-size: 1.6rem;
+    // transition: all 0.01s linear;
     box-sizing: border-box;
-    background-color: var(--app-color, transparent);
+    // background-color: var(--app-color, white);
     color: inherit;
-
     &:not(:placeholder-shown),
     &:-webkit-autofill {
+      font-size: 20px;
       ~ label {
-        color: var(--n300);
-        top: 0;
-        left: 0;
-        font-size: 12px;
-        transform: translate(0);
-        transition: all 0.2s linear;
+        color: var(--n600);
+        top: 15px;
+        left: 0px;
+        font-size: 1.2rem;
+        font-weight: 500;
+        line-height: normal;
+        // transition: all 0.1s linear;
       }
     }
     &:hover {
-      border: 2px solid var(--n100);
-      padding-left: 9px;
+      border: 1px solid var(--n100);
     }
     &:focus,
     &:focus-visible {
@@ -61,38 +57,38 @@
       outline: none;
 
       ~ label {
-        color: var(--n300);
-        top: 0;
-        left: 0;
-        font-size: 12px;
-        transform: translate(0);
-        transition: all 0.2s linear;
+        color: var(--n600);
+        top: 15px;
+        left: 0px;
+        font-size: 1.2rem;
+        line-height: normal;
+        font-weight: 500;
+        // transition: all 0.1s linear;
       }
     }
   }
   .error {
     input,
     textarea {
-      padding-left: 9px;
+      padding-left: 14px;
     }
   }
   input,
   textarea {
-    &:hover,
     &:focus,
     &:focus-visible {
-      padding-left: 9px;
+      padding-left: 14px;
     }
   }
   label {
     position: absolute;
     top: 50%;
     left: 0;
-    font-size: 15px;
-    color: var(--n300);
+    font-size: 1.6rem;
+    color: var(--n400);
     pointer-events: none;
-    transition: all 0.2s linear;
-    padding: 8px 10px;
+    transition: all 0.1s linear;
+    padding: 8px 15px;
     transform: translateY(-50%);
   }
   .error-message {
@@ -102,7 +98,7 @@
   &.icon-before {
     input,
     textarea {
-      padding-left: 35px;
+      padding-left: 38px;
 
       &:not(:placeholder-shown),
       &:-webkit-autofill,
@@ -112,11 +108,10 @@
           left: 26px;
         }
       }
-      &:hover,
       &:-webkit-autofill,
       &:focus,
       &:focus-visible {
-        padding-left: 34px;
+        padding-left: 37px;
       }
     }
     label {
@@ -150,14 +145,17 @@
     .error-message {
       opacity: 1;
       position: absolute;
-      bottom: -17px;
+      bottom: -5px;
       right: 0;
       color: var(--error);
-      font-size: 12px;
+      font-size: 1.2rem;
       margin-right: 10px;
       display: flex;
       align-items: center;
-
+      background-color: var(--n0);
+      padding: 1px 3px;
+      line-height: 0;
+      border-radius: 2px;
       svg {
         margin-right: 3px;
       }

@@ -24,6 +24,8 @@ const Popconfirm = ({
     <Popover
       isPopoverOpen={popconfirmOpen}
       setIsPopoverOpen={setPopconfirmOpen}
+      position="bottom"
+      align="center"
       content={
         <div className="eq-popconfirm-container">
           {/* @ts-ignore */}

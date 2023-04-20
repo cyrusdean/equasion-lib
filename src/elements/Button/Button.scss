@@ -2,13 +2,11 @@
   display: flex;
   cursor: pointer;
   border: 0;
-  margin-bottom: 10px;
-  margin-left: auto;
   font-weight: 500;
   align-items: center;
   justify-content: center;
-  transition: filter 0.3s;
-
+  transition: all 0.15s ease;
+  margin-bottom: 10px;
   font-size: var(--button-font-size, 1.4rem);
   letter-spacing: var(--button-letter-spacing, normal);
   border-radius: var(--button-border-radius, 6px);
@@ -21,8 +19,7 @@
     justify-content: center;
   }
   svg {
-    font-size: 15px;
-    margin-right: 3px;
+    font-size: 1.6rem;
   }
   &.eq-type {
     &-default {
@@ -54,11 +51,13 @@
       box-shadow: none;
 
       &:hover {
-        background-color: var(--n25);
+        background-color: var(--primary100);
+        color: var(--primary500);
       }
       &:active {
         background-color: var(--primary100);
         color: var(--primary600);
+        box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.04);
       }
       &:disabled {
         color: var(--n400);
@@ -68,10 +67,10 @@
       color: var(--button-link-color, var(--primaryColor));
       background-color: transparent;
       box-shadow: none;
-
       &:hover {
         .eq-button-inner-wrap:after {
-          transform: scaleX(1);
+          // transform: scaleX(1);
+          border-bottom: solid 1px var(--primaryColor);
         }
       }
       &:active {
@@ -85,9 +84,9 @@
       .eq-button-inner-wrap:after {
         display: block;
         content: '';
-        border-bottom: solid 1px var(--primaryColor);
-        transform: scaleX(0);
-        transition: transform 300ms ease-in-out;
+        // border-bottom: solid 1px var(--primaryColor);
+        // transform: scaleX(0);
+        // transition: transform 300ms ease-in-out;
         width: 100%;
         position: absolute;
         bottom: 0;
@@ -99,14 +98,15 @@
       box-shadow: none;
 
       &:hover {
-        color: var(--n300);
+        // color: var(--n400);
         .eq-button-inner-wrap:after {
-          transform: scaleX(1);
+          border-bottom: solid 1px var(--n400);
+          // transform: scaleX(1);
         }
       }
       &:active {
         text-decoration-line: none;
-        color: var(--n400);
+        color: var(--n600);
       }
       &:disabled {
         text-decoration-line: none;
@@ -115,9 +115,9 @@
       .eq-button-inner-wrap:after {
         display: block;
         content: '';
-        border-bottom: solid 1px var(--n300);
-        transform: scaleX(0);
-        transition: transform 300ms ease-in-out;
+        // border-bottom: solid 1px var(--n300);
+        // transform: scaleX(0);
+        // transition: transform 300ms ease-in-out;
         width: 100%;
         position: absolute;
         bottom: 0;
@@ -140,16 +140,16 @@
     }
     &-secondary {
       color: var(--button-secondary-color, var(--n0));
-      background-color: var(--n600);
+      background-color: var(--secondaryColor);
 
       &:hover {
-        background-color: var(--n400);
+        background-color: var(--secondary400);
       }
       &:active {
-        background-color: var(--primary700);
+        background-color: var(--secondary600);
       }
       &:disabled {
-        background-color: var(--n800);
+        background-color: var(--secondaryColor);
         opacity: 0.08;
         color: var(--n250);
       }
@@ -208,7 +208,53 @@
       padding: var(--button-compact-padding, 4px 12px);
     }
     &-large {
-      padding: var(--button-large-padding, 14px 30px);
+      padding: var(--button-large-padding, 12px 16px);
+      font-weight: 600;
+      font-size: 1.6rem;
+      svg {
+        font-size: 1.8rem;
+      }
+    }
+  }
+  &.icon {
+    &-before {
+      svg {
+        margin-right: 6px;
+      }
+    }
+    &-after {
+      svg {
+        margin-left: 6px;
+      }
+      &[type='submit'] {
+        svg {
+          transition: all 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
+          left: 10px;
+          position: relative;
+          left: 0;
+        }
+      }
+      &:hover {
+        &[type='submit'] {
+          &.eq-size {
+            &-default {
+              svg {
+                left: 7px;
+              }
+            }
+            &-compact {
+              svg {
+                left: 3px;
+              }
+            }
+            &-large {
+              svg {
+                left: 10px;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

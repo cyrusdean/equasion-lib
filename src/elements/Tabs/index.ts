@@ -41,6 +41,8 @@ export interface TabsProps {
   disabledKeys?: Array<KeyValue>
   menuOnly?: boolean
   vertical?: boolean
+  compact?: boolean
+  minimal?: boolean
   onTabChange?: (key: KeyValue) => void
 }
 

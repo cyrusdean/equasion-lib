@@ -94,7 +94,7 @@ const AppSelect = ({
                     }
                   }}
                 >
-                  - No Options Found -
+                  No options found
                 </div>
               )}
             </div>

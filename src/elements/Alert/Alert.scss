@@ -1,12 +1,31 @@
 .eq-alert {
-  padding: 20px;
+  padding: 15px;
   border: 1px solid;
-
+  border-radius: 4px;
+  span {
+    font-weight: 600;
+    display: block;
+  }
   &.eq-alert {
-    &-error {
+    &-default {
+      border-color: var(--n300);
+      background-color: var(--n50);
+      color: var(--n600);
+    }
+    &-success {
+      border-color: var(--g500);
+      background-color: var(--g100);
+      color: var(--g900);
+    }
+    &-danger {
       border-color: var(--r500);
-      border-radius: 5px;
       background-color: var(--r100);
+      color: var(--r900);
+    }
+    &-warning {
+      border-color: var(--y500);
+      background-color: var(--y100);
+      color: var(--y900);
     }
   }
 }
