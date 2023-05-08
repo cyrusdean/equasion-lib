@@ -18,11 +18,19 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "react": ">= 16.8.3"
+    "formik": ">= 2.2.9",
+    "lodash.get": ">= 4.4.2",
+    "react": ">= 16.8.3",
+    "react-data-table-component": ">= 7.4.7",
+    "react-date-range": ">= 1.4.0",
+    "react-icons": ">= 4.3.1",
+    "react-modal": ">= 3.14.4",
+    "react-spinners": ">= 0.11.0",
+    "react-tiny-popover": ">= 7.0.1",
+    "sweetalert2": ">= 11.4.0"
   },
   "devDependencies": {
     "@types/react": "^16.14.23",
-    "@types/react-dom": "^16.9.14",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
     "formik": "^2.2.9",
@@ -30,7 +38,6 @@
     "react": "^17.0.2",
     "react-data-table-component": "^7.4.7",
     "react-date-range": "^1.4.0",
-    "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-modal": "^3.14.4",
     "react-spinners": "^0.11.0",
