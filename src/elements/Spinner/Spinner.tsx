@@ -10,10 +10,10 @@ const Spinner = () => (
         // @ts-ignore
         <FadeLoader
           color="#000000"
-          height="10"
-          width="4"
-          margin="0"
-          radius="4"
+          height="10px"
+          width="4px"
+          margin="0px"
+          radius="4px"
         />
       }
     </div>
