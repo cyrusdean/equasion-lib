@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Popover } from '../../../../elements'
+import Popover from '../../../Popover'
 import { IoClose } from 'react-icons/io5'
 
 const AppSelect = ({
@@ -52,6 +52,8 @@ const AppSelect = ({
     setFilterValue(outsideValue ? optionsObj[outsideValue] || '' : '')
   }, [outsideValue])
 
+  const [textBeforeSearch, setTextBeforeSearch] = useState(false)
+
   return (
     <div className={combinedClasses}>
       <div style={{ position: 'relative' }}>
@@ -86,13 +88,13 @@ const AppSelect = ({
               ) : (
                 <div
                   className="option"
-                  onMouseDown={() => {
-                    if (!multi) {
-                      setFilterValue('')
-                      updateValue('')
-                      setPopoverOpen(false)
-                    }
-                  }}
+                  // onMouseDown={() => {
+                  //   if (!multi) {
+                  //     setFilterValue('');
+                  //     updateValue('');
+                  //     setPopoverOpen(false);
+                  //   }
+                  // }}
                 >
                   No options found
                 </div>
@@ -108,6 +110,36 @@ const AppSelect = ({
                 setFilterValue(target.value)
                 if (!popoverOpen) setPopoverOpen(true)
               }}
+              onKeyDown={(k) => {
+                const { key } = k || {}
+                if (key === 'Tab') {
+                  if (calcedOptions.length > 0) {
+                    const [pair = []] = calcedOptions || []
+                    const [
+                      k = '',
+                      // , v = ''
+                    ] = pair || []
+
+                    setFilterValue(k)
+                  }
+                }
+              }}
+              onKeyUp={(k) => {
+                const { key } = k || {}
+                if (key === 'Enter') {
+                  if (calcedOptions.length > 0) {
+                    const [pair = []] = calcedOptions || []
+                    console.log('pair', pair)
+                    const [
+                      k = '',
+                      // , v = ''
+                    ] = pair || []
+
+                    // updateFieldValue(k);
+                    setFilterValue(k)
+                  }
+                }
+              }}
               onBlur={() => {
                 if (!multi) {
                   if (
@@ -117,12 +149,20 @@ const AppSelect = ({
                         String(filterValue).toLowerCase()
                     ) ||
                     !filterValue
-                  )
-                    updateValue('')
+                  ) {
+                    if (!!textBeforeSearch) {
+                      setFilterValue(textBeforeSearch)
+                      setTextBeforeSearch('')
+                    } else {
+                      setFilterValue('')
+                    }
+                    // updateValue('');
+                  }
                 }
                 setPopoverOpen(false)
               }}
               onFocus={() => {
+                setTextBeforeSearch(filterValue)
                 setFilterValue('')
                 if (!popoverOpen) setPopoverOpen(true)
               }}
