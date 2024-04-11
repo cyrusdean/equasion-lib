@@ -49,6 +49,7 @@ const FormWrappedSelect = ({
   ].join(' ')
 
   const updateFieldValue = (val) => form.setFieldValue(formattedFieldName, val)
+  const [textBeforeSearch, setTextBeforeSearch] = useState(false)
 
   return (
     <div className={combinedClasses}>
@@ -83,13 +84,13 @@ const FormWrappedSelect = ({
               ) : (
                 <div
                   className="option"
-                  onMouseDown={() => {
-                    if (!multi) {
-                      setFilterValue('')
-                      updateFieldValue('')
-                      setPopoverOpen(false)
-                    }
-                  }}
+                  // onMouseDown={() => {
+                  //   if (!multi) {
+                  //     setFilterValue('')
+                  //     updateFieldValue('')
+                  //     setPopoverOpen(false)
+                  //   }
+                  // }}
                 >
                   No options found
                 </div>
@@ -106,7 +107,32 @@ const FormWrappedSelect = ({
                 setFilterValue(target.value)
                 if (!popoverOpen) setPopoverOpen(true)
               }}
+              onKeyDown={(k) => {
+                const { key } = k || {}
+                if (key === 'Tab') {
+                  if (calcedOptions.length > 0) {
+                    const [pair = []] = calcedOptions || []
+                    const [k = '', v = ''] = pair || []
+
+                    updateFieldValue(k)
+                    setFilterValue(v)
+                  }
+                }
+              }}
+              onKeyUp={(k) => {
+                const { key } = k || {}
+                if (key === 'Enter') {
+                  if (calcedOptions.length > 0) {
+                    const [pair = []] = calcedOptions || []
+                    const [k = '', v = ''] = pair || []
+
+                    updateFieldValue(k)
+                    setFilterValue(v)
+                  }
+                }
+              }}
               onBlur={() => {
+                // Single Selection at a time
                 if (!multi) {
                   if (
                     !calcedOptions.some(
@@ -114,15 +140,24 @@ const FormWrappedSelect = ({
                         String(display).toLowerCase() ===
                         filterValue.toLowerCase()
                     )
-                  )
-                    updateFieldValue('')
-                  else if (formValue && !!filterValue)
+                  ) {
+                    // Updates the field value to empty
+                    // updateFieldValue('');
+                    if (!!textBeforeSearch) {
+                      setFilterValue(textBeforeSearch)
+                      setTextBeforeSearch('')
+                    } else {
+                      setFilterValue('')
+                    }
+                    // updateFieldValue('')
+                  } else if (formValue && !!filterValue)
                     setFilterValue(optionsObj[formValue])
-                  else if (!filterValue) updateFieldValue('')
+                  // else if (!filterValue) updateFieldValue('')
                 }
                 setPopoverOpen(false)
               }}
               onFocus={() => {
+                setTextBeforeSearch(filterValue)
                 setFilterValue('')
                 if (!popoverOpen) setPopoverOpen(true)
               }}
