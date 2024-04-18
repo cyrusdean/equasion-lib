@@ -103,6 +103,7 @@ const FormWrappedSelect = ({
             <input
               {...field}
               {...rest}
+              onClick={(e) => e.stopPropagation()}
               onChange={({ target }) => {
                 setFilterValue(target.value)
                 if (!popoverOpen) setPopoverOpen(true)

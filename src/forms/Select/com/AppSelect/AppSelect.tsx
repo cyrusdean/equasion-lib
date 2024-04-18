@@ -106,6 +106,7 @@ const AppSelect = ({
             <span className="eq-input-icon">{iconBefore}</span>
             <input
               {...rest}
+              onClick={(e) => e.stopPropagation()}
               onChange={({ target }) => {
                 setFilterValue(target.value)
                 if (!popoverOpen) setPopoverOpen(true)
