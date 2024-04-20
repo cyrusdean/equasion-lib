@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Popover from '../../../Popover'
+import { Popover } from '../../../../elements'
 import { IoClose } from 'react-icons/io5'
 
 const AppSelect = ({
@@ -52,7 +52,7 @@ const AppSelect = ({
     setFilterValue(outsideValue ? optionsObj[outsideValue] || '' : '')
   }, [outsideValue])
 
-  const [textBeforeSearch, setTextBeforeSearch] = useState(false)
+  const [textBeforeSearch, setTextBeforeSearch] = useState('')
 
   return (
     <div className={combinedClasses}>

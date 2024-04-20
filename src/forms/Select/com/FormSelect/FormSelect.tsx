@@ -49,7 +49,7 @@ const FormWrappedSelect = ({
   ].join(' ')
 
   const updateFieldValue = (val) => form.setFieldValue(formattedFieldName, val)
-  const [textBeforeSearch, setTextBeforeSearch] = useState(false)
+  const [textBeforeSearch, setTextBeforeSearch] = useState('')
 
   return (
     <div className={combinedClasses}>
