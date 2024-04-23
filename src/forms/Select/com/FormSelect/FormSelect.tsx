@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Field } from 'formik'
+import { Field, FastField } from 'formik'
 import { Popover } from '../../../../elements'
 import { FiXCircle } from 'react-icons/fi'
 import { IoClose } from 'react-icons/io5'
@@ -199,6 +199,11 @@ const FormWrappedSelect = ({
   )
 }
 
-const FormSelect = (props) => <Field component={FormWrappedSelect} {...props} />
+const FormSelect = ({ fast, ...props }) =>
+  fast ? (
+    <FastField component={FormWrappedSelect} {...props} />
+  ) : (
+    <Field component={FormWrappedSelect} {...props} />
+  )
 
 export default FormSelect
