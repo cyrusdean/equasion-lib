@@ -109,14 +109,15 @@ const FormWrappedSelect = ({
                 if (!popoverOpen) setPopoverOpen(true)
               }}
               onKeyDown={(k) => {
-                const { key } = k || {}
-                if (key === 'Tab') {
-                  if (calcedOptions.length > 0) {
-                    const [pair = []] = calcedOptions || []
-                    const [k = '', v = ''] = pair || []
-
-                    updateFieldValue(k)
-                    setFilterValue(v)
+                if (!multi) {
+                  const { key } = k || {}
+                  if (key === 'Tab') {
+                    if (calcedOptions.length > 0) {
+                      const [pair = []] = calcedOptions || []
+                      const [k = '', v = ''] = pair || []
+                      updateFieldValue(k)
+                      setFilterValue(v)
+                    }
                   }
                 }
               }}
@@ -126,9 +127,13 @@ const FormWrappedSelect = ({
                   if (calcedOptions.length > 0) {
                     const [pair = []] = calcedOptions || []
                     const [k = '', v = ''] = pair || []
-
-                    updateFieldValue(k)
-                    setFilterValue(v)
+                    if (multi) {
+                      updateFieldValue([...(formValue || []), k])
+                      setFilterValue('')
+                    } else {
+                      updateFieldValue(k)
+                      setFilterValue(v)
+                    }
                   }
                 }
               }}
