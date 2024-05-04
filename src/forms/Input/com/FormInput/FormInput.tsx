@@ -26,10 +26,19 @@ const FormWrappedInput = ({
     if (formValue !== value) setValue(formValue)
   }, [formValue])
 
+  const combinedClasses = [
+    'eq-input',
+    iconBefore ? 'icon-before' : '',
+    iconAfter ? 'icon-after' : '',
+    errorExistsAndFieldTouched ? 'error' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   const updateFieldValue = (val) => form.setFieldValue(formattedFieldName, val)
 
   return (
-    <div className={`eq-input ${errorExistsAndFieldTouched ? 'error' : ''}`}>
+    <div className={combinedClasses}>
       <span className="eq-input-icon">{iconBefore}</span>
       {['input', 'number', 'password'].includes(inputType) ? (
         <input

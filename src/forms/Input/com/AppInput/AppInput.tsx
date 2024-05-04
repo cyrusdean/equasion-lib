@@ -18,8 +18,16 @@ const AppInput = ({
     if (onChange) onChange({ value })
   }
 
+  const combinedClasses = [
+    'eq-input',
+    iconBefore ? 'icon-before' : '',
+    iconAfter ? 'icon-after' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   return (
-    <div className="eq-input">
+    <div className={combinedClasses}>
       <span className="eq-input-icon">{iconBefore}</span>
       {['input', 'number', 'password'].includes(inputType) ? (
         <input

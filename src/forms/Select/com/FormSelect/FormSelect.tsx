@@ -46,7 +46,9 @@ const FormWrappedSelect = ({
     iconBefore ? 'icon-before' : '',
     iconAfter ? 'icon-after' : '',
     errorExistsAndFieldTouched ? 'error' : '',
-  ].join(' ')
+  ]
+    .filter(Boolean)
+    .join(' ')
 
   const updateFieldValue = (val) => form.setFieldValue(formattedFieldName, val)
   const [textBeforeSearch, setTextBeforeSearch] = useState('')

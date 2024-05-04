@@ -45,7 +45,9 @@ const AppSelect = ({
     'eq-select',
     iconBefore ? 'icon-before' : '',
     iconAfter ? 'icon-after' : '',
-  ].join(' ')
+  ]
+    .filter(Boolean)
+    .join(' ')
 
   useEffect(() => {
     setCurrentValue(multi && !outsideValue ? [] : outsideValue)
